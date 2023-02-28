@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="10dp"
+        android:orientation="vertical"
+
+        >
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/background_app"
+                >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                >
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/flash_back_icon"
+                    />
+                <TextView
+                    android:id="@+id/titleSlide"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Easy And Secure"
+                    android:fontFamily="@font/nunito_bold"
+                    android:textSize="20dp"
+                    android:textColor="@color/blue_app"
+                    android:paddingLeft="5dp"
+                    />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/slideDescription"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="We offer a secure application that ensures secure access and confidentiality of data."
+                    android:textColor="#A4999999"
+                    android:fontFamily="@font/nunito_bold"
+                    android:textSize="16dp"
+                    android:paddingLeft="35dp"
+
+                    />
+                <ImageView
+                    android:id="@+id/slideImage"
+                    android:layout_marginTop="30dp"
+                    android:paddingVertical="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/mysecu"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+
+</FrameLayout>

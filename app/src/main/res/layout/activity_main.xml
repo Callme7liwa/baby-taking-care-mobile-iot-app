@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/glass_background"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_weight="1">
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/babylogo"/>
+            <TextView
+                android:layout_marginTop="20dp"
+                android:layout_width="320dp"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:fontFamily="@font/nunito_medium"
+                android:textColor="#ffff"
+                android:text="Taking care of a baby is like tending to a delicate flower, requiring patience, attention, and constant nurturing"
+                android:textAllCaps="true"
+                android:textSize="12dp"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingVertical="10dp">
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/go_to_info_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="100dp"
+                android:paddingVertical="20dp"
+                android:textColor="@color/white"
+                android:fontFamily="@font/nunito_black"
+                android:letterSpacing="0.2"
+                android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_right_24"
+                android:text="next "
+                android:background="@drawable/button_rounded_welcom"
+                />
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
