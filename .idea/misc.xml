@@ -11,8 +11,12 @@
         <entry key="..\:/Users/MyPC/AndroidStudiAoProjects/BabyTakingCare/app/src/main/res/drawable/background_color_app.xml" value="0.138" />
         <entry key="..\:/Users/MyPC/AndroidStudiAoProjects/BabyTakingCare/app/src/main/res/drawable/background_light_white_rounded.xml" value="0.1485" />
         <entry key="..\:/Users/MyPC/AndroidStudiAoProjects/BabyTakingCare/app/src/main/res/drawable/button_rounded_welcom.xml" value="0.138" />
+        <entry key="..\:/Users/MyPC/AndroidStudiAoProjects/BabyTakingCare/app/src/main/res/drawable/circle_red.xml" value="0.1525" />
         <entry key="..\:/Users/MyPC/AndroidStudiAoProjects/BabyTakingCare/app/src/main/res/drawable/glass_background.xml" value="0.167" />
-        <entry key="..\:/Users/MyPC/AndroidStudiAoProjects/BabyTakingCare/app/src/main/res/layout/activity_login.xml" value="0.4" />
+        <entry key="..\:/Users/MyPC/AndroidStudiAoProjects/BabyTakingCare/app/src/main/res/drawable/ic_baseline_check_24.xml" value="0.1525" />
+        <entry key="..\:/Users/MyPC/AndroidStudiAoProjects/BabyTakingCare/app/src/main/res/drawable/input_background_border_blue.xml" value="0.1225" />
+        <entry key="..\:/Users/MyPC/AndroidStudiAoProjects/BabyTakingCare/app/src/main/res/drawable/input_background_border_red.xml" value="0.1225" />
+        <entry key="..\:/Users/MyPC/AndroidStudiAoProjects/BabyTakingCare/app/src/main/res/layout/activity_login.xml" value="0.536" />
         <entry key="..\:/Users/MyPC/AndroidStudiAoProjects/BabyTakingCare/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/Users/MyPC/AndroidStudiAoProjects/BabyTakingCare/app/src/main/res/layout/activity_services.xml" value="0.203125" />
         <entry key="..\:/Users/MyPC/AndroidStudiAoProjects/BabyTakingCare/app/src/main/res/layout/activity_splash.xml" value="0.2171875" />
