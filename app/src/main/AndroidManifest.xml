@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="ensias.myteam.babytakingcare">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -14,8 +16,8 @@
         android:theme="@style/AppTheme"
         tools:targetApi="31">
         <activity
-            android:name=".RegisterActivity"
-            android:exported="true" >
+            android:name=".AddBabyActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,8 +25,19 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LoginActivity"
+            android:name=".AcceuilActivity"
+            android:exported="false">
+
+        </activity>
+        <activity
+            android:name=".StatistiquesActivity"
             android:exported="false"></activity>
+        <activity
+            android:name=".RegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LoginActivity"
+            android:exported="false" />
         <activity
             android:name=".ServicesActivity"
             android:exported="false" />
