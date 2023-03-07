@@ -87,7 +87,6 @@
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
                 android:layout_margin="5dp"
-                android:text="Button 1"
                 android:background="@color/white"
                 android:elevation="10dp"
                 app:cardElevation="10dp"
