@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="15dp"
+        android:paddingVertical="7dp"
+        android:background="@drawable/input_background"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        >
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:padding="5dp"
+            android:background="@drawable/cirlce_light_white"
+            android:src="@drawable/layer_baby"
+            android:elevation="10dp"
+            />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="10dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Changing baby Layer"
+                android:textAllCaps="true"
+                android:textSize="11dp"
+                android:fontFamily="@font/nunito_bold"
+                android:textColor="#292929"
+                />
+            <TextView
+                android:id="@+id/changing_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="01-11-2023 at 15:30:01"
+                android:layout_marginTop="5dp"
+                android:textColor="#999"
+                android:fontFamily="@font/nunito_bold"
+
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
