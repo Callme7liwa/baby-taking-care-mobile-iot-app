@@ -9,18 +9,30 @@
         <entry key="..\:/Users/MyPC/AndroidStudiAoProjects/BabyTakingCare/app/src/main/res/drawable-v24/ic_baseline_keyboard_arrow_right_24.xml" value="0.164" />
         <entry key="..\:/Users/MyPC/AndroidStudiAoProjects/BabyTakingCare/app/src/main/res/drawable-v24/input_background.xml" value="0.136" />
         <entry key="..\:/Users/MyPC/AndroidStudiAoProjects/BabyTakingCare/app/src/main/res/drawable/background_color_app.xml" value="0.138" />
+        <entry key="..\:/Users/MyPC/AndroidStudiAoProjects/BabyTakingCare/app/src/main/res/drawable/background_custom_black.xml" value="0.1615" />
         <entry key="..\:/Users/MyPC/AndroidStudiAoProjects/BabyTakingCare/app/src/main/res/drawable/background_light_white_rounded.xml" value="0.1485" />
         <entry key="..\:/Users/MyPC/AndroidStudiAoProjects/BabyTakingCare/app/src/main/res/drawable/button_rounded_welcom.xml" value="0.138" />
+        <entry key="..\:/Users/MyPC/AndroidStudiAoProjects/BabyTakingCare/app/src/main/res/drawable/circle_red.xml" value="0.1525" />
         <entry key="..\:/Users/MyPC/AndroidStudiAoProjects/BabyTakingCare/app/src/main/res/drawable/glass_background.xml" value="0.167" />
-        <entry key="..\:/Users/MyPC/AndroidStudiAoProjects/BabyTakingCare/app/src/main/res/layout/activity_login.xml" value="0.4" />
+        <entry key="..\:/Users/MyPC/AndroidStudiAoProjects/BabyTakingCare/app/src/main/res/drawable/ic_baseline_check_24.xml" value="0.1525" />
+        <entry key="..\:/Users/MyPC/AndroidStudiAoProjects/BabyTakingCare/app/src/main/res/drawable/ic_baseline_chevron_left_black_24.xml" value="0.1615" />
+        <entry key="..\:/Users/MyPC/AndroidStudiAoProjects/BabyTakingCare/app/src/main/res/drawable/input_background_border_blue.xml" value="0.1225" />
+        <entry key="..\:/Users/MyPC/AndroidStudiAoProjects/BabyTakingCare/app/src/main/res/drawable/input_background_border_red.xml" value="0.1225" />
+        <entry key="..\:/Users/MyPC/AndroidStudiAoProjects/BabyTakingCare/app/src/main/res/layout/activity_acceuil.xml" value="0.264" />
+        <entry key="..\:/Users/MyPC/AndroidStudiAoProjects/BabyTakingCare/app/src/main/res/layout/activity_add_baby.xml" value="0.25885416666666666" />
+        <entry key="..\:/Users/MyPC/AndroidStudiAoProjects/BabyTakingCare/app/src/main/res/layout/activity_login.xml" value="0.264" />
         <entry key="..\:/Users/MyPC/AndroidStudiAoProjects/BabyTakingCare/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/Users/MyPC/AndroidStudiAoProjects/BabyTakingCare/app/src/main/res/layout/activity_register.xml" value="0.25885416666666666" />
         <entry key="..\:/Users/MyPC/AndroidStudiAoProjects/BabyTakingCare/app/src/main/res/layout/activity_services.xml" value="0.203125" />
         <entry key="..\:/Users/MyPC/AndroidStudiAoProjects/BabyTakingCare/app/src/main/res/layout/activity_splash.xml" value="0.2171875" />
+        <entry key="..\:/Users/MyPC/AndroidStudiAoProjects/BabyTakingCare/app/src/main/res/layout/activity_statistiques.xml" value="0.1671875" />
         <entry key="..\:/Users/MyPC/AndroidStudiAoProjects/BabyTakingCare/app/src/main/res/layout/background_custom_blue.xml" value="0.2611111111111111" />
         <entry key="..\:/Users/MyPC/AndroidStudiAoProjects/BabyTakingCare/app/src/main/res/layout/custom_layout.xml" value="0.21614583333333334" />
         <entry key="..\:/Users/MyPC/AndroidStudiAoProjects/BabyTakingCare/app/src/main/res/layout/custom_slider_item.xml" value="0.2734375" />
+        <entry key="..\:/Users/MyPC/AndroidStudiAoProjects/BabyTakingCare/app/src/main/res/layout/header.xml" value="0.2734375" />
         <entry key="..\:/Users/MyPC/AndroidStudiAoProjects/BabyTakingCare/app/src/main/res/layout/slider_item.xml" value="0.5200501253132832" />
         <entry key="..\:/Users/MyPC/AndroidStudiAoProjects/BabyTakingCare/app/src/main/res/layout/slider_layout.xml" value="0.2171875" />
+        <entry key="..\:/Users/MyPC/AndroidStudiAoProjects/BabyTakingCare/app/src/main/res/menu/main_menu.xml" value="1.0979166666666667" />
       </map>
     </option>
   </component>

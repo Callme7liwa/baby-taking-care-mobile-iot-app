@@ -10,14 +10,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.SeekBar;
 
 import java.util.Locale;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import ensias.myteam.babytakingcare.Adapters.MyCustomSliderAdapter;
-import ensias.myteam.babytakingcare.Adapters.ViewPagerAdapter;
+
 public class ServicesActivity extends AppCompatActivity {
 
     private ViewPager servicesViewPager;
