@@ -85,7 +85,7 @@
                         >
 
                         <EditText
-                            android:id="@+id/text_firstName"
+                            android:id="@+id/text_firstName_register"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@drawable/input_background"
@@ -149,7 +149,7 @@
                         >
 
                         <EditText
-                            android:id="@+id/text_secondName"
+                            android:id="@+id/text_secondName_register"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@drawable/input_background"
@@ -211,7 +211,7 @@
                     >
 
                     <EditText
-                        android:id="@+id/text_email"
+                        android:id="@+id/text_email_register"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/input_background"
@@ -280,7 +280,7 @@
                         >
 
                         <EditText
-                            android:id="@+id/text_password"
+                            android:id="@+id/text_password_register"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@drawable/input_background"
@@ -343,7 +343,7 @@
                         >
 
                         <EditText
-                            android:id="@+id/text_passwordConfirmation"
+                            android:id="@+id/text_passwordConfirmation_register"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@drawable/input_background"
@@ -373,6 +373,7 @@
 
         </LinearLayout>
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_register"
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -392,6 +393,7 @@
             />
 
             <TextView
+                android:id="@+id/go_to_login"
                 android:layout_marginTop="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

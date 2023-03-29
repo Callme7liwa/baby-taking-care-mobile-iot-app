@@ -20,7 +20,6 @@ public class BVAdapter extends FragmentPagerAdapter {
     @NonNull
     @Override
     public Fragment getItem(int position) {
-        System.out.println("the position is =>" + position);
         return fragments.get(position);
     }
 

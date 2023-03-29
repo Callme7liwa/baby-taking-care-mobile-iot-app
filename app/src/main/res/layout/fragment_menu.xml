@@ -6,12 +6,29 @@
     tools:context=".fragments.MenuFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:textColor="@color/black"
         android:gravity="center"
         android:background="@color/white"
-        android:text="Im In Menu" />
+        android:text="Im In Menu"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Im In Menu"
+            android:textColor="@color/black"
+            />
+        <TextView
+            android:id="@+id/menuValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            />
+    </LinearLayout>
+
+
 
 </FrameLayout>

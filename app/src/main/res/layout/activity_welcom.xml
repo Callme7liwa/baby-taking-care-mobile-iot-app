@@ -26,14 +26,14 @@
                 android:padding="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="NOTIFACTION"
+                android:text="menu"
                 android:textColor="@color/white"/>
 
             <com.google.android.material.tabs.TabItem
                 android:padding="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="MENU"
+                android:text="notifications"
                 android:textColor="@color/white"/>
         </com.google.android.material.tabs.TabLayout>
         <androidx.viewpager.widget.ViewPager

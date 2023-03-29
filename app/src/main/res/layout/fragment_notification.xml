@@ -12,6 +12,6 @@
         android:textColor="@color/black"
         android:gravity="center"
         android:background="@color/white"
-        android:text="Im In Menu" />
+        android:text="Im In notifications" />
 
 </FrameLayout>
