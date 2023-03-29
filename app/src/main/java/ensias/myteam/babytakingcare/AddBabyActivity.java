@@ -19,6 +19,7 @@ import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Patterns;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import com.blogspot.atifsoftwares.circularimageview.CircularImageView;
 import com.google.firebase.database.DataSnapshot;
@@ -58,6 +59,8 @@ public class AddBabyActivity extends AppCompatActivity {
 
     private AppCompatButton submitButton ;
 
+    private ImageView backButton ;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +79,7 @@ public class AddBabyActivity extends AppCompatActivity {
         babyBirthday = findViewById(R.id.baby_birthday_register);
         addImage_iv = findViewById(R.id.addImage_iv);
         submitButton = findViewById(R.id.submit_add_baby);
+        backButton = findViewById(R.id.back_button);
 
         addImage_iv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,6 +92,13 @@ public class AddBabyActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 validateData();
+            }
+        });
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
             }
         });
     }
@@ -190,7 +201,6 @@ public class AddBabyActivity extends AppCompatActivity {
         }
     }
 
-
     private void saveToDirectory(String srcDir, String desDir) throws IOException {
         File src = new File(srcDir);
         File des = new File(desDir, src.getName());
@@ -263,7 +273,6 @@ public class AddBabyActivity extends AppCompatActivity {
             }
         }
     }
-
 
     private void saveNewBaby()
     {

@@ -11,11 +11,16 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.sdsmdg.tastytoast.TastyToast;
+
+import java.util.UUID;
 
 import ensias.myteam.babytakingcare.Models.Parent;
 
@@ -27,6 +32,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private FirebaseAuth auth ;
     private FirebaseUser user ;
+    private FirebaseFirestore db;
 
     private ProgressDialog progressDialog;
 
@@ -49,6 +55,7 @@ public class RegisterActivity extends AppCompatActivity {
         buttonRegister  = findViewById(R.id.button_register);
 
         auth = FirebaseAuth.getInstance() ;
+        db = FirebaseFirestore.getInstance();
 
         buttonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,24 +112,41 @@ public class RegisterActivity extends AppCompatActivity {
         progressDialog.setMessage("Please wait while u be registred ...");
         progressDialog.show();
 
+        auth.createUserWithEmailAndPassword(emailValue, passwordValue)
+            .addOnCompleteListener(task -> {
+                progressDialog.dismiss();
+                if (task.isSuccessful()) {
+                    TastyToast.makeText(this, "successfully registered", TastyToast.LENGTH_SHORT, TastyToast.SUCCESS);
+                    saveParentOnDb();
+                    user = auth.getCurrentUser();
+                    getSavedStateRegistry();
+                    Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    String errorMessage = task.getException().getMessage();
+                    TastyToast.makeText(this, errorMessage, TastyToast.LENGTH_SHORT, TastyToast.WARNING);
+                }
+            });
+    }
+
+    private void saveParentOnDb()
+    {
+        user = auth.getCurrentUser();
+        String timestamp = String.valueOf(System.currentTimeMillis());
         Parent parent  = new Parent() ;
         parent.setFirstName(firstNameValue);
         parent.setSecondName(secondNameValue);
+        parent.setCreatedOn(timestamp);
+        parent.setUpdatedOn(timestamp);
 
-        auth.createUserWithEmailAndPassword(emailValue, passwordValue)
-                .addOnCompleteListener(task -> {
-                    progressDialog.dismiss();
-                    if (task.isSuccessful()) {
-                        user = auth.getCurrentUser();
-                        TastyToast.makeText(this, "Registered succesfuly ", TastyToast.LENGTH_SHORT, TastyToast.SUCCESS);
-                        Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                        startActivity(intent);
-                        finish();
-                    } else {
-                        String errorMessage = task.getException().getMessage();
-                        TastyToast.makeText(this, errorMessage, TastyToast.LENGTH_SHORT, TastyToast.WARNING);
-                    }
-                });
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("babiesDb");
+
+        // ajouter le nouvel objet à la base de données
+        String contactId = ref.push().getKey();
+        ref.child(user.getUid()).setValue(parent);
+        onBackPressed();
+
     }
 
 }

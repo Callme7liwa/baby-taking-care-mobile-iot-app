@@ -1,6 +1,7 @@
 package ensias.myteam.babytakingcare.Models;
 
 public class Baby {
+
     private String name ;
     private String image ;
     private String birthday ;

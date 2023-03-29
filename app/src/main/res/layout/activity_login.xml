@@ -147,6 +147,7 @@
                 />
 
             <LinearLayout
+                android:id="@+id/login_button"
                 android:layout_marginTop="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -181,6 +182,7 @@
             android:textColor="#999"/>
 
         <TextView
+            android:id="@+id/go_to_register"
             android:layout_marginTop="10dp"
             android:paddingHorizontal="40dp"
             android:paddingVertical="15dp"
