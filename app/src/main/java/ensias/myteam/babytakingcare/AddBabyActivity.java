@@ -9,6 +9,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -22,10 +23,15 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.blogspot.atifsoftwares.circularimageview.CircularImageView;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.sdsmdg.tastytoast.TastyToast;
 import com.theartofdev.edmodo.cropper.CropImage;
@@ -60,7 +66,11 @@ public class AddBabyActivity extends AppCompatActivity {
     private AppCompatButton submitButton ;
 
     private ImageView backButton ;
-
+    //
+    private FirebaseAuth auth ;
+    private FirebaseUser user ;
+    //
+    private ProgressDialog progressDialog ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +90,10 @@ public class AddBabyActivity extends AppCompatActivity {
         addImage_iv = findViewById(R.id.addImage_iv);
         submitButton = findViewById(R.id.submit_add_baby);
         backButton = findViewById(R.id.back_button);
-
+        //
+        auth = FirebaseAuth.getInstance() ;
+        user = auth.getCurrentUser() ;
+        //
         addImage_iv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -123,9 +136,7 @@ public class AddBabyActivity extends AppCompatActivity {
             TastyToast.makeText(this, "Please enter your birthday baby !", TastyToast.LENGTH_LONG, TastyToast.ERROR);
             return;
         }
-
         saveNewBaby();
-
     }
 
     private void addPhotoDialog() {
@@ -133,25 +144,82 @@ public class AddBabyActivity extends AppCompatActivity {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Add Photo")
-                .setItems(options, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        if (i == 0) {
-                            if (ContextCompat.checkSelfPermission(AddBabyActivity.this, android.Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED &&
-                                    ContextCompat.checkSelfPermission(AddBabyActivity.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-                                addImageFromCamera();
-                            } else {
-                                requestCameraPermission();
-                            }
+            .setItems(options, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    if (i == 0) {
+                        if (ContextCompat.checkSelfPermission(AddBabyActivity.this, android.Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED &&
+                                ContextCompat.checkSelfPermission(AddBabyActivity.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                            addImageFromCamera();
                         } else {
-                            if (ContextCompat.checkSelfPermission(AddBabyActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-                                addImageFromGallery();
-                            } else {
-                                requestStoragePermission();
-                            }
+                            requestCameraPermission();
+                        }
+                    } else {
+                        if (ContextCompat.checkSelfPermission(AddBabyActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                            addImageFromGallery();
+                        } else {
+                            requestStoragePermission();
                         }
                     }
-                }).show();
+                }
+            }).show();
+    }
+
+
+
+    private void saveNewBaby()
+    {
+        // Get a reference to the "devices" node in your database
+        DatabaseReference devicesRef = FirebaseDatabase.getInstance().getReference("devicesId");
+        Query query = devicesRef.orderByKey().equalTo(deviceIdValue);
+
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    DataSnapshot deviceSnapshot = snapshot.getChildren().iterator().next();
+                    boolean isUsed = (boolean) deviceSnapshot.child("used").getValue();
+                    if(isUsed)
+                        TastyToast.makeText(AddBabyActivity.this, "this device already used!", TastyToast.LENGTH_LONG, TastyToast.ERROR);
+                    else
+                    {
+                        progressDialog = new ProgressDialog(AddBabyActivity.this);
+                        progressDialog.setTitle("Registration");
+                        progressDialog.setMessage("Please wait while THE baby registered ...");
+                        progressDialog.show();
+                        saveInfoBaby();
+                        DatabaseReference usedRef = deviceSnapshot.child("used").getRef();
+                        usedRef.setValue(true);
+                        progressDialog.dismiss();
+                        TastyToast.makeText(AddBabyActivity.this, "Congrats , the baby registered successfully!", TastyToast.LENGTH_LONG, TastyToast.SUCCESS);
+                    }
+                } else {
+                    // Device with the specified ID is not found
+                    TastyToast.makeText(AddBabyActivity.this, "this device cannot be found!", TastyToast.LENGTH_LONG, TastyToast.ERROR);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Handle error
+            }
+        });
+    }
+
+    private void saveInfoBaby()
+    {
+        String userId = user.getUid();
+        DatabaseReference babiesRef = FirebaseDatabase.getInstance().getReference("babiesDb").child(userId).child("babies").child(deviceIdValue);
+        String timestamp = String.valueOf(System.currentTimeMillis());
+        Baby baby = new Baby();
+        baby.setName(babyNameValue);
+        baby.setBirthday(babyBirthdayValue);
+        baby.setImage(""+imageUri);
+        baby.setCreated_on(timestamp);
+        baby.setLast_updated_on(timestamp);
+        baby.setTemperature(""+0);
+        baby.setWeight(""+0);
+        babiesRef.setValue(baby);
     }
 
     private void addImageFromGallery() {
@@ -272,42 +340,6 @@ public class AddBabyActivity extends AppCompatActivity {
                 }
             }
         }
-    }
-
-    private void saveNewBaby()
-    {
-        DatabaseReference babyRef =
-                FirebaseDatabase
-                        .getInstance()
-                        .getReference("babiesDb")
-                        .child(deviceIdValue);
-                ;
-
-        babyRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()) {
-                    String timestamp = String.valueOf(System.currentTimeMillis());
-                    Baby baby = new Baby();
-                    baby.setName(babyNameValue);
-                    baby.setBirthday(babyBirthdayValue);
-                    baby.setImage(""+imageUri);
-                    baby.setCreated_on(timestamp);
-                    baby.setLast_updated_on(timestamp);
-                    baby.setTemperature(""+0);
-                    baby.setWeight(""+0);
-                    babyRef.setValue(baby);
-                } else {
-                    TastyToast.makeText(AddBabyActivity.this, "Wrong Device Id !", TastyToast.LENGTH_LONG, TastyToast.ERROR);
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                // Gérer l'erreur
-            }
-        });
-
-
     }
 
 

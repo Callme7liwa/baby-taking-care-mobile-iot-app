@@ -17,14 +17,16 @@ import com.sdsmdg.tastytoast.TastyToast;
 import ensias.myteam.babytakingcare.AcceuilActivity;
 import ensias.myteam.babytakingcare.AddBabyActivity;
 import ensias.myteam.babytakingcare.BabiesActivity;
+import ensias.myteam.babytakingcare.EditUserActivity;
 import ensias.myteam.babytakingcare.LoginActivity;
 import ensias.myteam.babytakingcare.TestActivity;
+import ensias.myteam.babytakingcare.UserDetailsActivity;
 import ensias.myteam.babytakingcare.databinding.FragmentHomeBinding;
 
 public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding binding;
-    private LinearLayout list_babies , add_baby ;
+    private LinearLayout list_babies , add_baby , my_info , update_my_info ;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -36,6 +38,8 @@ public class HomeFragment extends Fragment {
 
         list_babies = binding.listBabies;
         add_baby = binding.addNewBaby;
+        my_info = binding.myInformations ;
+        update_my_info = binding.updateMyInformations;
 
         list_babies.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,6 +56,23 @@ public class HomeFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
+        my_info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity() , UserDetailsActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        update_my_info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity() , EditUserActivity.class);
+                startActivity(intent);
+            }
+        });
+
         return root;
     }
 

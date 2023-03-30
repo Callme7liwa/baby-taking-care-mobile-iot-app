@@ -3,8 +3,13 @@ package ensias.myteam.babytakingcare.Models;
 public class Parent {
     private  String firstName ;
     private  String secondName ;
+    private  String image ;
+    private  String birthday ;
+    private  String location ;
+    private  String phoneNumber ;
     private  String createdOn ;
     private  String updatedOn ;
+
 
     public Parent() {
     }
@@ -44,5 +49,37 @@ public class Parent {
 
     public void setUpdatedOn(String updatedOn) {
         this.updatedOn = updatedOn;
+    }
+
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 }

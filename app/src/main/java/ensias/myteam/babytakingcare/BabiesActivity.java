@@ -16,6 +16,8 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -43,6 +45,9 @@ public class BabiesActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
     private ScrollView scrollView;
     private LinearLayout noDataFound ;
+    //
+    private FirebaseAuth auth ;
+    private FirebaseUser user ;
 
 
     @Override
@@ -65,7 +70,10 @@ public class BabiesActivity extends AppCompatActivity {
         scrollView = findViewById(R.id.list_info);
         recyclerView = findViewById(R.id.babies_list);
         noDataFound = findViewById(R.id.noBabiesHasFound);
-
+        //
+        auth = FirebaseAuth.getInstance() ;
+        user = auth.getCurrentUser();
+        //
         go_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -81,7 +89,7 @@ public class BabiesActivity extends AppCompatActivity {
         progressDialog.setMessage("Please wait while u be registred ...");
         progressDialog.show();
 
-        String userId = "Oh2WjmJLpkURvcNKHeCu8gON5H6z1";
+        String userId = user.getUid();
         DatabaseReference babiesRef =
                          FirebaseDatabase.getInstance().getReference()
                         .child("babiesDb").child(userId).child("babies");

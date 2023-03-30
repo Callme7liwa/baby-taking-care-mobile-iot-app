@@ -103,7 +103,7 @@ public class LoginActivity extends AppCompatActivity {
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
                         progressDialog.dismiss();
-                        Intent intent = new Intent(LoginActivity.this, AcceuilActivity.class);
+                        Intent intent = new Intent(LoginActivity.this, TestActivity.class);
                         TastyToast.makeText(LoginActivity.this, "Logged in successfully" , TastyToast.LENGTH_LONG, TastyToast.SUCCESS).show();
                         startActivity(intent);
                         finish();
