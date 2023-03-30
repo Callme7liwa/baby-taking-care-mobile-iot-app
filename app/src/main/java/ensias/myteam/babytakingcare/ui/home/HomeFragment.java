@@ -52,7 +52,6 @@ public class HomeFragment extends Fragment {
                 startActivity(intent);
             }
         });
-
         return root;
     }
 
