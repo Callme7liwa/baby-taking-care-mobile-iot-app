@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".EditUserActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/blue_app"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/back_btn"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="16dp"
+            android:src="@drawable/ic_baseline_chevron_left_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="2"
+            android:text="Edit Your Profile"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/back_btn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/back_btn" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.blogspot.atifsoftwares.circularimageview.CircularImageView
+        android:id="@+id/userImage_edit"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="24dp"
+        android:src="@drawable/add_photo"
+        app:c_border="false"
+        app:c_background_color="@color/grey"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
+        android:visibility="visible"/>
+
+    <ImageView
+        android:id="@+id/userBadge_edit"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginBottom="1dp"
+        android:src="@drawable/shape_circle01"
+        app:layout_constraintBottom_toBottomOf="@+id/userImage_edit"
+        app:layout_constraintEnd_toEndOf="@+id/userImage_edit"
+        app:layout_constraintStart_toStartOf="@+id/userImage_edit"
+        app:layout_constraintTop_toTopOf="@+id/userImage_edit"
+        android:visibility="invisible"/>
+
+    <TextView
+        android:id="@+id/badgeLetter_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="50sp"
+        app:layout_constraintBottom_toBottomOf="@+id/userBadge_edit"
+        app:layout_constraintEnd_toEndOf="@+id/userBadge_edit"
+        app:layout_constraintStart_toStartOf="@+id/userBadge_edit"
+        app:layout_constraintTop_toTopOf="@+id/userBadge_edit"
+        android:visibility="invisible"/>
+
+    <TextView
+        android:id="@+id/changeImage_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Change Photo"
+        android:textAlignment="center"
+        android:textColor="@color/blue_app"
+        android:fontFamily="@font/nunito_medium"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/userImage_edit"
+        app:layout_constraintStart_toStartOf="@+id/userImage_edit"
+        app:layout_constraintTop_toBottomOf="@+id/userImage_edit" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/changeImage_edit"
+        tools:ignore="MissingConstraints">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingVertical="20dp"
+            android:layout_marginTop="10dp"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                >
+                <EditText
+                    android:id="@+id/firstName_edit"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="2dp"
+                    android:background="@drawable/shape_rect01"
+                    android:drawableStart="@drawable/ic_person"
+                    android:drawablePadding="5dp"
+                    android:drawableTint="@color/blue_app"
+                    android:hint="First Name"
+                    android:inputType="text"
+                    android:padding="15sp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/light_grey"
+                    android:textSize="15sp"
+                    android:layout_weight="1"
+                    />
+                <EditText
+                    android:id="@+id/secondName_edit"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:background="@drawable/shape_rect01"
+                    android:drawableStart="@drawable/ic_person"
+                    android:drawablePadding="5dp"
+                    android:drawableTint="@color/blue_app"
+                    android:hint="Second Name"
+                    android:inputType="text"
+                    android:padding="15sp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/light_grey"
+                    android:textSize="15sp"
+                    android:layout_weight="1"
+
+                    />
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/birthday_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="32dp"
+                android:background="@drawable/shape_rect01"
+                android:drawableStart="@drawable/ic_birthday"
+                android:drawablePadding="5dp"
+                android:drawableTint="@color/blue_app"
+                android:hint="Birthday"
+                android:inputType="text"
+                android:padding="15sp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/light_grey"
+                android:textSize="15sp"
+             />
+
+            <EditText
+                android:id="@+id/phoneNumber_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="32dp"
+                android:background="@drawable/shape_rect01"
+                android:drawableStart="@drawable/ic_phone"
+                android:drawablePadding="5dp"
+                android:drawableTint="@color/blue_app"
+                android:hint="Phone Number"
+                android:inputType="text"
+                android:padding="15sp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/light_grey"
+                android:textSize="15sp"
+             />
+
+            <EditText
+                android:id="@+id/location_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="32dp"
+                android:background="@drawable/shape_rect01"
+                android:drawableStart="@drawable/ic_location"
+                android:drawablePadding="5dp"
+                android:drawableTint="@color/blue_app"
+                android:hint="Location"
+                android:inputType="text"
+                android:padding="15sp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/light_grey"
+                android:textSize="15sp"
+             />
+
+        </LinearLayout>
+    </ScrollView>
+
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/saveUpdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        app:backgroundTint="@color/blue_app"
+        android:src="@drawable/ic_save"
+        app:tint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

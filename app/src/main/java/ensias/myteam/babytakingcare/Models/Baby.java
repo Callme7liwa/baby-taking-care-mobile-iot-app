@@ -1,17 +1,17 @@
 package ensias.myteam.babytakingcare.Models;
 
 public class Baby {
+
     private String name ;
     private String image ;
     private String birthday ;
     private String weight ;
     private String temperature ;
+    private String created_on, last_updated_on;
 
 
     public Baby() {
     }
-
-
 
     public Baby(String name , String weight , String temperature,String birthday) {
         this.name=name;
@@ -60,4 +60,25 @@ public class Baby {
     public void setBirthday(String birthday) {
         this.birthday = birthday;
     }
+
+    public String getCreated_on()
+    {
+        return  this.created_on;
+    }
+
+    public String getLast_updated_on()
+    {
+        return this.last_updated_on;
+    }
+
+    public void setCreated_on(String created_on)
+    {
+        this.created_on = created_on ;
+    }
+
+    public void setLast_updated_on(String last_updated_on)
+    {
+        this.last_updated_on = last_updated_on ;
+    }
+
 }

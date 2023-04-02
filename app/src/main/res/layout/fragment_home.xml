@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".ui.home.HomeFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/white">*
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:columnCount="2"
+            android:rowCount="3"
+            android:padding="10dp"
+            android:background="@color/white">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:layout_margin="5dp"
+                android:background="@color/white"
+                android:elevation="10dp"
+                app:cardElevation="10dp"
+                app:cardCornerRadius="10dp"
+                >
+                <LinearLayout
+                    android:id="@+id/list_babies"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:background="@color/white"
+                    >
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:src="@drawable/baby_login"
+                        android:layout_gravity="center_horizontal"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="See my babies"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/nunito_bold"
+                        android:textSize="10dp"
+                        android:textAllCaps="true"/>
+                    <ImageView
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/right"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:layout_margin="5dp"
+                android:text="Button 1"
+                android:background="@color/white"
+                android:elevation="10dp"
+                app:cardElevation="10dp"
+                app:cardCornerRadius="10dp"
+                >
+                <LinearLayout
+                    android:id="@+id/add_new_baby"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:background="@color/white"
+                    >
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="80dp"
+                        android:src="@drawable/babylogo"
+                        android:layout_gravity="center_horizontal"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="add new babies"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/nunito_bold"
+                        android:textSize="10dp"
+                        android:textAllCaps="true"/>
+                    <ImageView
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/plus"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:layout_margin="5dp"
+                android:text="Button 1"
+                android:background="@color/white"
+                android:elevation="10dp"
+                app:cardElevation="10dp"
+                app:cardCornerRadius="10dp"
+                >
+                <LinearLayout
+                    android:id="@+id/my_informations"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:background="@color/white"
+                    >
+                    <ImageView
+                        android:layout_width="60dp"
+                        android:layout_height="80dp"
+                        android:src="@drawable/family_icon"
+                        android:layout_gravity="center_horizontal"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="my informations"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/nunito_bold"
+                        android:textSize="10dp"
+                        android:textAllCaps="true"/>
+                    <ImageView
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/right"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:layout_margin="5dp"
+                android:text="Button 1"
+                android:background="@color/white"
+                android:elevation="10dp"
+                app:cardElevation="10dp"
+                app:cardCornerRadius="10dp"
+
+                >
+                <LinearLayout
+                    android:id="@+id/update_my_informations"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:background="@color/white"
+                    >
+
+                    <ImageView
+                        android:layout_width="69dp"
+                        android:layout_height="82dp"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/icon_information" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Update my infomations"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/nunito_bold"
+                        android:textSize="10dp"
+                        android:textAllCaps="true"/>
+                    <ImageView
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/refresh"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:layout_margin="5dp"
+                android:text="Button 1"
+                android:background="@color/white"
+                android:elevation="10dp"
+                app:cardElevation="10dp"
+                app:cardCornerRadius="10dp"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:background="@color/white"
+                    >
+
+                    <ImageView
+                        android:layout_width="69dp"
+                        android:layout_height="82dp"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/icon_services" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="See our services"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/nunito_bold"
+                        android:textSize="10dp"
+                        android:textAllCaps="true"/>
+                    <ImageView
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/right"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:layout_margin="5dp"
+                android:text="Button 1"
+                android:background="@color/white"
+                android:elevation="10dp"
+                app:cardElevation="10dp"
+                app:cardCornerRadius="10dp"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:background="@color/white"
+                    >
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="82dp"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/icon_about_us" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="About us "
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/nunito_bold"
+                        android:textSize="10dp"
+                        android:textAllCaps="true"/>
+                    <ImageView
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/right"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:layout_margin="5dp"
+                android:text="Button 1"
+                android:background="@color/white"
+                android:elevation="10dp"
+                app:cardElevation="10dp"
+                app:cardCornerRadius="10dp"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:background="@color/white"
+                    >
+
+                    <ImageView
+                        android:layout_width="69dp"
+                        android:layout_height="82dp"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/contact_us_icon" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Contact us"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/nunito_bold"
+                        android:textSize="10dp"
+                        android:textAllCaps="true"/>
+                    <ImageView
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/icon_message_us"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+        </GridLayout>
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,40 +7,48 @@
     android:background="@color/white"
     android:orientation="vertical">
 
-
-
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:padding="10dp"
-        android:background="@color/white">
-        <RelativeLayout
+        android:layout_height="60dp"
+        android:background="@color/blue_app"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/back_button"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="16dp"
+            android:src="@drawable/ic_baseline_chevron_left_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/cirlce_light_white"
-                android:elevation="10dp"
-                android:padding="10dp"
-                android:src="@drawable/ic_baseline_chevron_left_black_24"
-
-                />
-        </RelativeLayout>
-    </LinearLayout>
-
+            android:layout_gravity="center_vertical"
+            android:layout_weight="2"
+            android:text="Add new baby"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/back_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/back_button" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:background="@color/white"
-        >
+        android:layout_marginTop="10dp"
 
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -49,8 +57,8 @@
             android:orientation="vertical">
 
             <ImageView
-                android:layout_width="150dp"
-                android:layout_height="150dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:layout_gravity="center"
                 android:src="@drawable/icon_add_baby" />
 
@@ -89,7 +97,7 @@
                     >
 
                     <EditText
-                        android:id="@+id/device_id"
+                        android:id="@+id/device_id_register"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/input_background"
@@ -152,7 +160,7 @@
                     >
 
                     <EditText
-                        android:id="@+id/text_fullName"
+                        android:id="@+id/baby_name_register"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/input_background"
@@ -215,7 +223,7 @@
                     >
 
                     <EditText
-                        android:id="@+id/text_birthday"
+                        android:id="@+id/baby_birthday_register"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/input_background"
@@ -249,62 +257,34 @@
                 android:layout_marginRight="5dp"
                 android:layout_marginBottom="10dp">
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:gravity = "center_vertical"
-                    android:layout_marginTop="5dp"
-                    >
 
 
-                    <LinearLayout
-                        android:id="@+id/upload_baby_image"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/background_custom_black"
-                        android:gravity="center"
-                        android:padding="15dp">
-
-                        <ImageView
-                            android:layout_width="35dp"
-                            android:layout_height="35dp"
-                            android:src="@drawable/checked_icon" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/nunito_medium"
-                            android:letterSpacing="0.07"
-                            android:textSize="12dp"
-                            android:text="UPLOAD BABY IMAGE"
-                            android:textColor="@color/white" />
-                    </LinearLayout>
+                    <com.blogspot.atifsoftwares.circularimageview.CircularImageView
+                        android:id="@+id/addImage_iv"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginEnd="24dp"
+                        android:src="@drawable/add_photo"
+                        app:c_background_color="@color/grey"
+                        app:c_border="false"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                         />
 
 
-                    <ImageView
-                        android:visibility="gone"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:background="@drawable/circle_blue"
-                        android:foregroundGravity="right"
-                        android:padding="5dp"
-                        android:src="@drawable/ic_baseline_check_24"
-                        android:layout_marginRight="10dp"/>
-                </RelativeLayout>
             </LinearLayout>
 
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/submit_add_baby"
                 android:layout_marginTop="10dp"
-                android:id="@+id/button_choose_image"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Submit"
                 android:textColor="#fff"
                 android:layout_centerInParent="true"
-                android:padding="20dp"
+                android:padding="15dp"
                 android:background="@drawable/button_background_blue"
                 />
 

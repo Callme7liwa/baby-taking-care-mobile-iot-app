@@ -55,6 +55,11 @@ public class ServicesActivity extends AppCompatActivity {
                 if (nextPosition < dotscount) {
                     servicesViewPager.setCurrentItem(nextPosition);
                 }
+                else
+                {
+                    startActivity(new Intent(ServicesActivity.this , LoginActivity.class));
+                    finish();
+                }
             }
         });
 
