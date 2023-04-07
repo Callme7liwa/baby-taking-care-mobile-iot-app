@@ -30,9 +30,7 @@ public class ServicesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_services);
-
         initProcess();
-
         servicesViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -85,12 +83,12 @@ public class ServicesActivity extends AppCompatActivity {
     private void initProcess() {
         //
         currentPosition = 0;
-        nextButton = findViewById(R.id.next_button);
-        prevButton = findViewById(R.id.prev_button);
+        nextButton =(AppCompatButton) findViewById(R.id.next_button);
+        prevButton = (AppCompatButton)findViewById(R.id.prev_button);
         prevButton.setVisibility(View.GONE);
-        backImage = findViewById(R.id.back_to_welcome_page);
+        backImage = (ImageView) findViewById(R.id.back_to_welcome_page);
         //
-        servicesViewPager = findViewById(R.id.view_page_services);
+        servicesViewPager =(ViewPager) findViewById(R.id.view_page_services);
         sliderDotspanel = findViewById(R.id.SliderDots);
         MyCustomSliderAdapter customSliderAdapter = new MyCustomSliderAdapter(this);
         servicesViewPager.setAdapter(customSliderAdapter);

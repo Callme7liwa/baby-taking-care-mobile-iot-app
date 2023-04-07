@@ -23,7 +23,6 @@
         tools:ignore="MissingConstraints"
         android:padding="10dp"
         android:elevation="0dp"
-
         >
 
         <LinearLayout
@@ -103,7 +102,7 @@
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/view_page_services"
             android:layout_width="match_parent"
-            android:layout_height="400dp"
+            android:layout_height="330dp"
             android:layout_marginTop="10dp"
             android:background="@android:color/transparent"
             />

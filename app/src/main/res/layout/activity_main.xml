@@ -52,7 +52,7 @@
                 android:fontFamily="@font/nunito_black"
                 android:letterSpacing="0.2"
                 android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_right_24"
-                android:text="next "
+                android:text="next"
                 android:background="@drawable/button_rounded_welcom"
                 />
         </LinearLayout>

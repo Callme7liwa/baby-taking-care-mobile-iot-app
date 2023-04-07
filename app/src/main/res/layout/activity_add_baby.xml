@@ -56,11 +56,19 @@
             android:paddingHorizontal="20dp"
             android:orientation="vertical">
 
-            <ImageView
+            <com.blogspot.atifsoftwares.circularimageview.CircularImageView
+                android:id="@+id/addImage_iv"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_gravity="center"
-                android:src="@drawable/icon_add_baby" />
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:src="@drawable/add_photo"
+                app:c_background_color="@color/grey"
+                app:c_border="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -259,19 +267,7 @@
 
 
 
-                    <com.blogspot.atifsoftwares.circularimageview.CircularImageView
-                        android:id="@+id/addImage_iv"
-                        android:layout_width="120dp"
-                        android:layout_height="120dp"
-                        android:layout_gravity="center"
-                        android:layout_marginStart="24dp"
-                        android:layout_marginEnd="24dp"
-                        android:src="@drawable/add_photo"
-                        app:c_background_color="@color/grey"
-                        app:c_border="false"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                         />
+
 
 
             </LinearLayout>

@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "744539071367",
-    "project_id": "babytakingcaredb",
-    "storage_bucket": "babytakingcaredb.appspot.com"
+    "project_number": "933122459329",
+    "project_id": "babytakingcare",
+    "storage_bucket": "babytakingcare.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:744539071367:android:ec683bd787b72ce8f9a922",
+        "mobilesdk_app_id": "1:933122459329:android:773ba7364368149a563640",
         "android_client_info": {
           "package_name": "ensias.myteam.babytakingcare"
         }
       },
       "oauth_client": [
         {
-          "client_id": "744539071367-non31vens6s8t8mmsqtnfbm1i6aqohj7.apps.googleusercontent.com",
+          "client_id": "933122459329-6taderumkdludohfmucvpjm1ll4s0qo6.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyC224IBOLmUjHo_Ui1sH5gpwY8qMpqOUtc"
+          "current_key": "AIzaSyAcmiereYsR-ctb5I6i42umRcbQRVRapPo"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "744539071367-non31vens6s8t8mmsqtnfbm1i6aqohj7.apps.googleusercontent.com",
+              "client_id": "933122459329-6taderumkdludohfmucvpjm1ll4s0qo6.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
