@@ -49,9 +49,9 @@ public class BabyAdapter extends RecyclerView.Adapter<BabyAdapter.BabyViewHolder
         holder.textView.setText(babies.get(position).getName());
         // Vérifie si la position actuelle correspond à la position sélectionnée
         if (position == currentPosition) {
-            holder.itemView.setBackgroundResource(R.drawable.input_background_border_blue);
+            holder.itemView.setBackgroundResource(R.drawable.item_background_border_blue);
         } else {
-            holder.itemView.setBackgroundResource(R.drawable.input_background);
+            holder.itemView.setBackgroundResource(R.drawable.item_background);
         }
     }
 

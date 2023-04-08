@@ -62,8 +62,8 @@ public class BabiesActivity extends AppCompatActivity {
 
     private void initialisation()
     {
-        text_baby_name = findViewById(R.id.text_baby_name);
-        text_baby_temperature = findViewById(R.id.text_baby_temperature);
+       // text_baby_name = findViewById(R.id.text_baby_name);
+       // text_baby_temperature = findViewById(R.id.text_baby_temperature);
         text_baby_weight = findViewById(R.id.text_baby_weight);
         text_baby_birthday = findViewById(R.id.text_baby_birthday);
         go_back = findViewById(R.id.go_back);
@@ -145,8 +145,8 @@ public class BabiesActivity extends AppCompatActivity {
         this.currentBaby.setTemperature(baby.getTemperature());
         this.currentBaby.setWeight(baby.getWeight());
 
-        this.text_baby_name.setText(this.currentBaby.getName());
-        this.text_baby_temperature.setText(this.currentBaby.getTemperature());
+       // this.text_baby_name.setText(this.currentBaby.getName());
+      //  this.text_baby_temperature.setText(this.currentBaby.getTemperature());
         this.text_baby_weight.setText(this.currentBaby.getWeight());
         this.text_baby_birthday.setText(this.currentBaby.getBirthday());
     }
