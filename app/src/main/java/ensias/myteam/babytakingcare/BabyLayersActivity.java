@@ -32,11 +32,8 @@ public class BabyLayersActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_baby_layers);
-
         initialisation();
-
         showLayersChangingHistory(layerHistoryDtos);
-
         // Obtenez une référence à votre TextView qui affiche la date actuelle
 
         // Ajouter un OnClickListener pour ouvrir le DatePicker dans un popup

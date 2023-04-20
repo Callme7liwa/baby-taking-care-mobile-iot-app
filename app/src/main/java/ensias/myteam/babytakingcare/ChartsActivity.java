@@ -1,153 +1,246 @@
 package ensias.myteam.babytakingcare;
 
+import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.DatePicker;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
+import androidx.cardview.widget.CardView;
 
 import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.formatter.IAxisValueFormatter;
-import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
-import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-import ensias.myteam.babytakingcare.services.HourValueFormatter;
+
+import ensias.myteam.babytakingcare.databinding.ActivityAlarmChangingLayerBinding;
+
 
 
 public class ChartsActivity extends AppCompatActivity {
 
-    LineChart lineChartView;
+    private LineChart chart;
+    private List<Entry> entries;
+    //
+    private FirebaseUser user  ;
+    private FirebaseAuth auth ;
+    private FirebaseDatabase db ;
+    private DatabaseReference reference ;
+    //
+    private String babyId ;
+    private String currentDate = "" ;
+    //
+    private TextView babyNameText , dateText  , currentDateSelected ;
+    private LinearLayout currentDateContainer ;
+    //
+    private CardView backBtn ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_statistiques);
-        /*lineChartView = (LineChart) findViewById(R.id.line_chart);
-        int color = ContextCompat.getColor(this, R.color.background_app);
-        lineChartView.setBackgroundColor(color);*/
 
-        LineChart chart = findViewById(R.id.line_chart);
+        initialisation();
+        getTemperatures();
 
-        // Enable touch gestures
-        chart.setTouchEnabled(true);
+        currentDateContainer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Obtenir la date actuelle pour initialiser le DatePicker
+                final Calendar calendar = Calendar.getInstance();
+                int year = calendar.get(Calendar.YEAR);
+                int month = calendar.get(Calendar.MONTH);
+                int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-        // Enable scaling and dragging
-        chart.setDragEnabled(true);
-        chart.setScaleEnabled(true);
+                // Créer un DatePickerDialog pour sélectionner une nouvelle date
+                DatePickerDialog datePickerDialog = new DatePickerDialog(ChartsActivity.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        Calendar selectedDate = Calendar.getInstance();
+                        selectedDate.set(year, monthOfYear, dayOfMonth);
 
-        // Customize the chart's background color
-        chart.setBackgroundColor(Color.WHITE);
+                        // Récupère le nom du jour de la semaine
+                        String dayName = selectedDate.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.ENGLISH);
 
-        // Customize the chart's legend
-        chart.getLegend().setEnabled(false);
+                        // Formate la date
+                        DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.MEDIUM, Locale.ENGLISH);
+                        String formattedDate = dateFormat.format(selectedDate.getTime());
 
-        // Customize the chart's X-axis
-        XAxis xAxis = chart.getXAxis();
-        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        xAxis.setGranularity(1f); // Set X-axis step to 2 hours
-        xAxis.setTextColor(Color.BLACK);
-        xAxis.setDrawGridLines(false);
-        xAxis.setAxisLineColor(Color.BLACK);
-        // Create a list of X-axis values in hours
-        // Customize the chart's Y-axis
-        YAxis yAxis = chart.getAxisLeft();
-        yAxis.setAxisMinimum(-10f);
-        yAxis.setAxisMaximum(60f);
-        yAxis.setGranularity(10f); // Set Y-axis step to 10 degrees
-        yAxis.setTextColor(Color.BLACK);
-        yAxis.setDrawGridLines(true);
-        yAxis.setGridColor(Color.LTGRAY);
-        yAxis.setAxisLineColor(Color.BLACK);
+                        dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+                        currentDate = dateFormat.format(selectedDate.getTime());
 
-        // Disable the right Y-axis
-        chart.getAxisRight().setEnabled(false);
 
-        // Generate sample temperature data
-        List<Entry> entries = new ArrayList<>();
-        for (int i = 0; i < 24; i += 4) {
-            float temperature = (float) (Math.random() * (50 - (-10)) - 10);
-            entries.add(new Entry(i, temperature));
+                        currentDateSelected.setText(dayName + " " + formattedDate);
+
+                        getTemperatures();
+                    }
+                }, year, month, day);
+                // Afficher le DatePickerDialog dans un popup
+                datePickerDialog.show();
+            }
+        });
+
+        this.backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+    }
+
+    private void initialisation()
+    {
+        Intent intent = getIntent();
+        babyId = intent.getStringExtra("babyId");
+        this.db = FirebaseDatabase.getInstance() ;
+        this.auth = FirebaseAuth.getInstance() ;
+        this.user = this.auth.getCurrentUser();
+        this.currentDateContainer = findViewById(R.id.currentDate);
+        this.currentDateSelected  = findViewById(R.id.currentDateValue);
+        this.babyNameText = findViewById(R.id.babyName);
+        this.dateText = findViewById(R.id.date_temperatures);
+        this.backBtn = findViewById(R.id.back_btn_temperatures);
+        setupChart();
+    }
+
+    private void getTemperatures()
+    {
+        if(currentDate.equals(""))
+        {
+            DatabaseReference ref =  db
+                                        .getReference("babiesDb")
+                                        .child(this.user.getUid())
+                                        .child("babies")
+                                        .child(babyId)
+                                        .child("temperatures");
+
+            Query latestDateQuery = ref.orderByChild("date").limitToLast(1);
+
+            latestDateQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                            currentDate = snapshot.getKey();
+                        }
+                        retrieveData();
+                    }
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    // handle error
+                }
+            });
         }
+        else
+        retrieveData();
+    }
 
-        // Create a dataset and configure its properties
-        LineDataSet dataSet = new LineDataSet(entries, "Temperature");
-        dataSet.setColor(Color.RED);
-        dataSet.setLineWidth(2f);
-        dataSet.setCircleColor(Color.RED);
-        dataSet.setCircleRadius(4f);
+    private void retrieveData ()
+    {
+        reference = db
+                .getReference("babiesDb")
+                .child(this.user.getUid())
+                .child("babies")
+                .child(babyId)
+                .child("temperatures")
+                .child(currentDate)
+                .child("moyen");
+
+        entries = new ArrayList<>();
+
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                int i=4 ;
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    String timeRange = snapshot.getKey();
+                    float value = snapshot.child("value").getValue(Float.class);
+                    System.out.println("the value : " + value + " time range " + timeRange);
+                    entries.add(new Entry(i, value));
+                    i=i+4 ;
+                }
+                // Mettre à jour le graphique avec les nouvelles données
+                updateChart(entries);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Gestion d'erreur
+            }
+        });
+    }
+
+
+    private void setupChart() {
+        chart = findViewById(R.id.chart);
+
+        LineDataSet dataSet = new LineDataSet(entries, "Moyen");
         dataSet.setDrawValues(false);
+        dataSet.setColor(Color.BLUE);
 
-        // Create a LineData object containing the dataset
         LineData lineData = new LineData(dataSet);
+        chart.setData(lineData);
 
-        // Set the data to the chart and refresh it
+        chart.getAxisRight().setEnabled(false);
+        chart.setTouchEnabled(false);
+        chart.getDescription().setEnabled(false);
+        chart.invalidate();
+    }
+
+    private void updateChart(List<Entry> entries) {
+        // Créer un ensemble de données à partir des entrées et des labels
+        LineDataSet dataSet = new LineDataSet(entries, "Température");
+        // Définir les labels pour l'axe X
+        configureAxisX();
+        //
+        configureAxisY();
+        // Créer un ensemble de données pour l'axe des y
+        LineData lineData = new LineData(dataSet);
+        // Mettre à jour le graphique avec les nouvelles données
         chart.setData(lineData);
         chart.invalidate();
     }
 
-    private void secondInitialisation()
+    private void configureAxisX()
     {
-        // Définir les limites de l'axe Y
-        lineChartView.getAxisLeft().setAxisMinimum(-10f);
-        lineChartView.getAxisLeft().setAxisMaximum(60f);
-
-        // Définir le nombre de libellés à afficher sur l'axe Y
-        lineChartView.getAxisLeft().setLabelCount(8);
-
-        // Diviser l'axe X en intervalles de 30 minutes
-        long now = System.currentTimeMillis();
-        long thirtyMinutes = 30 * 60 * 1000;
-        long minX = now - (12 * thirtyMinutes);
-        long maxX = now + (12 * thirtyMinutes);
-        lineChartView.getXAxis().setAxisMinimum(minX);
-        lineChartView.getXAxis().setAxisMaximum(maxX);
-        lineChartView.getXAxis().setLabelCount(24);
-
-        // Convertir les timestamps en libellés
-        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-        List<String> xLabels = new ArrayList<>();
-        for (long i = minX; i <= maxX; i += thirtyMinutes) {
-            xLabels.add(sdf.format(new Date(i)));
-        }
-
-        LineDataSet lineDataSet = new LineDataSet(getDataValues(), "Data Set 1");
-        ArrayList<ILineDataSet> dataSets = new ArrayList<>();
-        dataSets.add(lineDataSet);
-
-        LineData data = new LineData(dataSets);
-        lineChartView.setData(data);
-        lineChartView.invalidate();
-
+        XAxis xAxis = chart.getXAxis();
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxis.setGranularity(1f);
+        xAxis.setAxisMinimum(4f);
+        xAxis.setAxisMaximum(24f);
+        xAxis.setLabelCount(6, true);
     }
 
-    private void firstInitialisation()
+    private void configureAxisY()
     {
-        LineDataSet lineDataSet = new LineDataSet(getDataValues(), "Data Set 1");
-        ArrayList<ILineDataSet> dataSets = new ArrayList<>();
-        dataSets.add(lineDataSet);
-
-        LineData data = new LineData(dataSets);
-        lineChartView.setData(data);
-        lineChartView.invalidate();
+        // Configurer l'axe y
+        YAxis yAxis = chart.getAxisLeft();
+        yAxis.setGranularity(1f);
+        yAxis.setAxisMinimum(0f);
+        yAxis.setAxisMaximum(50f);
     }
-
-    private ArrayList<Entry> getDataValues()
-    {
-        ArrayList<Entry> entries = new ArrayList<>();
-        entries.add(new Entry(0f, 20f));
-        entries.add(new Entry(1f, 25f));
-        entries.add(new Entry(2f, 30f));
-        entries.add(new Entry(3f, 35f));
-        entries.add(new Entry(4f, 40f));
-        return entries ;
-    }
-
 }
+
+

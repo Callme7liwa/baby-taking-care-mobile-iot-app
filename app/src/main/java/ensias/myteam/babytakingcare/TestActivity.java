@@ -1,5 +1,9 @@
 package ensias.myteam.babytakingcare;
 
+import android.app.ActivityManager;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Menu;
@@ -15,15 +19,35 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
 import ensias.myteam.babytakingcare.databinding.ActivityTestBinding;
+import ensias.myteam.babytakingcare.services.LayerService;
+import ensias.myteam.babytakingcare.services.NotificationService;
+import ensias.myteam.babytakingcare.services.RootService;
 
 public class TestActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityTestBinding binding;
+    private boolean isTemperatureServiceRunning, isLayerServiceRunning;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        /*Vérifier si les services sont démarrés
+        isTemperatureServiceRunning = isServiceRunning(NotificationService.class);
+        isLayerServiceRunning = isServiceRunning(LayerService.class);*/
+
+        /*Intent temperatureServiceIntent = new Intent(this, NotificationService.class);
+        Intent layerServiceIntent = new Intent(this, LayerService.class);*/
+
+        /*if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            startService(temperatureServiceIntent);
+            startService(layerServiceIntent);
+        } else {
+            startService(temperatureServiceIntent);
+            startService(layerServiceIntent);
+        }*/
 
         binding = ActivityTestBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -50,6 +74,8 @@ public class TestActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_test);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+        checkAndStartServices();
     }
 
     @Override
@@ -65,4 +91,30 @@ public class TestActivity extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
+
+    private void checkAndStartServices() {
+        // Vérifier si les services sont actuellement en cours d'exécution
+        boolean isRootService = isServiceRunning(RootService.class);
+
+        // Si un ou les deux services ne sont pas en cours d'exécution, les démarrer
+        if (!isRootService) {
+            System.out.println("the system is not running");
+            Intent rootServiceIntent = new Intent(this, RootService.class);
+            startService(rootServiceIntent);
+        }
+    }
+
+    // Méthode pour vérifier si un service est en cours d'exécution
+    private boolean isServiceRunning(Class<?> serviceClass) {
+        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (serviceClass.getName().equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+
 }

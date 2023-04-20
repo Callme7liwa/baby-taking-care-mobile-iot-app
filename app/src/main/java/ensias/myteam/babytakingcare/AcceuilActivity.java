@@ -4,7 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ActivityManager;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+
+import ensias.myteam.babytakingcare.services.NotificationService;
 
 
 public class AcceuilActivity extends AppCompatActivity {
@@ -13,7 +16,6 @@ public class AcceuilActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_acceuil);
-
     }
 
     public boolean isMyServiceRunning(Class<?> serviceClass) {

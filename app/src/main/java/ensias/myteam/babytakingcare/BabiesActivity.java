@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.telephony.PhoneNumberUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -48,13 +49,14 @@ public class BabiesActivity extends AppCompatActivity {
     //
     private FirebaseAuth auth ;
     private FirebaseUser user ;
+    //
+    private LinearLayout temperatures_baby  , services_baby  , history_baby ;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_babies);
-
         initialisation();
         getBabies();
 
@@ -62,6 +64,11 @@ public class BabiesActivity extends AppCompatActivity {
 
     private void initialisation()
     {
+        //
+        temperatures_baby = findViewById(R.id.temperatures_baby);
+        services_baby = findViewById(R.id.services_baby);
+        history_baby = findViewById(R.id.histories_baby);
+        //
         text_baby_name = findViewById(R.id.text_baby_name);
         text_baby_temperature = findViewById(R.id.text_baby_temperature);
         text_baby_weight = findViewById(R.id.text_baby_weight);
@@ -80,19 +87,50 @@ public class BabiesActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
+        //
+       temperatures_baby.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(BabiesActivity.this, ChartsActivity.class);
+                intent.putExtra("babyId", currentBaby.getId().toString());
+                startActivity(intent);
+                finish();
+            }
+        });
+       //
+       services_baby.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(BabiesActivity.this, BabyServiceActivity.class);
+                intent.putExtra("babyId", currentBaby.getId().toString());
+                startActivity(intent);
+                finish();
+            }
+        });
+       //
+        history_baby.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(BabiesActivity.this, HistoryActivity.class);
+                intent.putExtra("babyId", currentBaby.getId().toString());
+                startActivity(intent);
+                finish();
+            }
+        });
+        //
     }
 
     private void getBabies()
     {
         progressDialog = new ProgressDialog(this);
         progressDialog.setTitle("Registration");
-        progressDialog.setMessage("Please wait while u be registred ...");
+        progressDialog.setMessage("Please wait while u be registered ...");
         progressDialog.show();
 
         String userId = user.getUid();
         DatabaseReference babiesRef =
-                         FirebaseDatabase.getInstance().getReference()
-                        .child("babiesDb").child(userId).child("babies");
+                                        FirebaseDatabase.getInstance().getReference()
+                                        .child("babiesDb").child(userId).child("babies");
 
         babiesRef.addValueEventListener(new ValueEventListener() {
 
@@ -100,13 +138,14 @@ public class BabiesActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot babySnapshot : snapshot.getChildren()) {
                     Baby baby = babySnapshot.getValue(Baby.class);
+                    baby.setId(babySnapshot.getKey());
                     babies.add(baby);
                 }
                 progressDialog.dismiss();
                 if(babies.size() > 0 )
                 {
-                    showBabies(babies);
                     changeCurrentBaby(babies.get(0));
+                    showBabies(babies);
                 }
                 else
                 {
@@ -127,8 +166,7 @@ public class BabiesActivity extends AppCompatActivity {
     private void showBabies(List<Baby> babies) {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-       /* recyclerView = findViewById(R.id.babies_list);*/
-        recyclerView.addItemDecoration(new EqualSpacingItemDecoration(16, EqualSpacingItemDecoration.HORIZONTAL)); // 16px. In practice, you'll want to use getDimensionPixelSize
+        recyclerView.addItemDecoration(new EqualSpacingItemDecoration(16, EqualSpacingItemDecoration.HORIZONTAL));
         contactAdapter = new BabyAdapter(this, babies , new ClickListener<Baby>() {
             @Override
             public void onClick(Baby baby) {
@@ -140,6 +178,7 @@ public class BabiesActivity extends AppCompatActivity {
 
     private void changeCurrentBaby(Baby baby)
     {
+        this.currentBaby.setId(baby.getId());
         this.currentBaby.setName(baby.getName());
         this.currentBaby.setBirthday(baby.getBirthday());
         this.currentBaby.setTemperature(baby.getTemperature());

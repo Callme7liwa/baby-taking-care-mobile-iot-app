@@ -1,9 +1,7 @@
 package ensias.myteam.babytakingcare;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
-import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
 import android.app.Notification;
@@ -12,6 +10,8 @@ import android.app.NotificationManager;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.view.View;
 
 import com.google.firebase.FirebaseApp;
@@ -23,6 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import ensias.myteam.babytakingcare.services.NotificationService;
 
+
 public class NotificationActivity extends AppCompatActivity {
 
     private AppCompatButton button ;
@@ -31,11 +32,31 @@ public class NotificationActivity extends AppCompatActivity {
     NotificationManagerCompat notificationManagerCompat ;
     Notification notification ;
 
+    private Vibrator vibrator;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notification);
+        vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+
+            //if API = 26(Oreo) or higher
+            vibrator.vibrate(
+                    VibrationEffect.createOneShot(1000,VibrationEffect.DEFAULT_AMPLITUDE)
+            );
+
+        } else {
+            //vibrate for 1 second
+            vibrator.vibrate(200000000);
+
+            //Vibration Pattern - you can create yours
+            long[] pattern = {0, 200, 10, 500};
+            vibrator.vibrate(pattern, -1);
+        }
 
         initialisation();
 

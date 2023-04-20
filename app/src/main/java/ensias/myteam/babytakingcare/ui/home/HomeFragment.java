@@ -14,6 +14,8 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.sdsmdg.tastytoast.TastyToast;
 
+import ensias.myteam.babytakingcare.AboutServicesActivity;
+import ensias.myteam.babytakingcare.AboutUsActivity;
 import ensias.myteam.babytakingcare.AcceuilActivity;
 import ensias.myteam.babytakingcare.AddBabyActivity;
 import ensias.myteam.babytakingcare.BabiesActivity;
@@ -26,7 +28,7 @@ import ensias.myteam.babytakingcare.databinding.FragmentHomeBinding;
 public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding binding;
-    private LinearLayout list_babies , add_baby , my_info , update_my_info ;
+    private LinearLayout list_babies , add_baby , my_info , update_my_info , our_services , aboutUs ;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -40,6 +42,8 @@ public class HomeFragment extends Fragment {
         add_baby = binding.addNewBaby;
         my_info = binding.myInformations ;
         update_my_info = binding.updateMyInformations;
+        our_services =  binding.ourServices ;
+        aboutUs = binding.aboutUs ;
 
         list_babies.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,6 +73,22 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity() , EditUserActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        our_services.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity() , AboutServicesActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        aboutUs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity() , AboutUsActivity.class);
                 startActivity(intent);
             }
         });

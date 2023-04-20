@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <color name="tab_unselected_text_color">#757575</color>
+    <color name="tab_selected_text_color">#FF0000</color>
+
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
@@ -14,5 +18,47 @@
     <color name="red_app">#f94949</color>
     <color name="white_light">#25585858</color>
     <color name="light_grey">#C1C1C1</color>
+    <color name="orange">#e16912</color>
+    <color name="green">#2EFB00</color>
+    <color name="blue_light">#00DEFB</color>
+
+    <color name="primaryLight200">#DCFFFC</color>
+    <color name="secondaryLight">#015DAB</color>
+    <color name="secondary200">#030CB1</color>
+    <color name="gray100">#EBEBEB</color>
+    <color name="gray400WithOpacity14">#12707070</color>
+    <color name="gray400WithOpacity5">#05707070</color>
+    <color name="gray700">#707070</color>
+    <color name="linkWithoutButton">#ADB6E1</color>
+    <color name="white200">#8CFFFFFF</color>
+    <color name="gray700WithOpacity5">#0D707070</color>
+    <color name="gray600">#C3C3C3</color>
+    <color name="black500">#1F2F5A</color>
+    <color name="gray500Dark">#1E2948</color>
+    <color name="green500">#27CCB0</color>
+    <color name="green200">#27CC42</color>
+    <color name="yellow200">#FFD500</color>
+
+
+
+    <array name="BrushingChartColor">
+        <item>@color/secondaryLight</item>
+        <item>@color/orange</item>
+        <item>@color/green</item>
+        <item>@color/green500</item>
+        <item>@color/green200</item>
+        <item>@color/yellow200</item>
+        <item>@color/secondary200</item>
+    </array>
+
+    <array name="BrushingChartFilterColor">
+        <item>@color/green200</item>
+        <item>@color/yellow200</item>
+        <item>@color/secondaryLight</item>
+        <item>@color/green500</item>
+        <item>@color/orange</item>
+        <item>@color/green200</item>
+    </array>
+
 
 </resources>

@@ -206,6 +206,7 @@
                 app:cardCornerRadius="10dp"
                 >
                 <LinearLayout
+                    android:id="@+id/our_services"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -248,6 +249,7 @@
                 app:cardCornerRadius="10dp"
                 >
                 <LinearLayout
+                    android:id="@+id/aboutUs"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"

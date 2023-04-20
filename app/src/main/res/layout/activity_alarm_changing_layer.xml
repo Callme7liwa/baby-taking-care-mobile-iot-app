@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".AlarmChangingLayerActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="20dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Reminder"
+                android:textSize="26dp"
+                android:textColor="@color/black"
+                />
+            <androidx.cardview.widget.CardView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:elevation="10dp"
+                android:backgroundTint="@color/white"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="10dp"
+                android:layout_margin="10dp"
+                >
+                <ImageView
+                    android:layout_gravity="center"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/icon_notifications"/>
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/white_light" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="300dp"
+                android:src="@drawable/baby_layer_cover"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:textSize="18dp"
+                android:textFontWeight="500"
+                android:fontFamily="@font/nunito_medium"
+                android:text="It's time to change the layer"
+                android:textColor="@color/black"
+                />
+            <TextView
+                android:id="@+id/text_babyNameLayer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:textSize="13dp"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="5dp"
+                android:background="@drawable/background_custom_blue"
+                android:textFontWeight="500"
+                android:textAllCaps = "true"
+                android:fontFamily="@font/dm_sans_regular"
+                android:text="Ayoub"
+                android:textColor="@color/white"
+                />
+            <TextView
+                android:id="@+id/text_dateLayer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito_medium"
+                android:layout_marginTop="5dp"
+                android:text="2022-11-01 ~~ 11:01"
+                android:textColor="@color/black"
+                />
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/stopAlarm_layer"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:background="@drawable/button_background_blue"
+                android:layout_gravity="center"
+                android:padding="10dp"
+                android:textColor="@color/white"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/nunito_medium"
+                android:text="Stop the alarm"/>
+
+        </LinearLayout>
+
+
+
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

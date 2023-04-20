@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="MyTabLayout" parent="Widget.Design.TabLayout">
+        <!-- Change the color of the selected tab -->
+        <item name="tabSelectedTextColor">@color/blue_light</item>
+        <!-- Add this to set the icon for the selected tab -->
+    </style>
+
+
+</resources>
