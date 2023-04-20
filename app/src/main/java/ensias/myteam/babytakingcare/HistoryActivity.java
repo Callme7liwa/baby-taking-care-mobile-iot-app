@@ -45,7 +45,7 @@ public class WelcomeActivity extends AppCompatActivity {
     Notification notification ;
 
 
-    List<String> titles = List.of("Menu" , "Notifications");
+    List<String> titles = List.of("Chi haja" , "Notifications");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,20 +112,13 @@ public class WelcomeActivity extends AppCompatActivity {
     }
 
     private void getBabies() {
-
-        System.out.println("************************* okokoko ********************************");
-
-
         this.databaseReference = FirebaseDatabase.getInstance().getReference("employes");
-
         this.databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    System.out.println("************************* okokoko ********************************");
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                System.out.println("************************* okokoko ********************************");
             }
         });
 
