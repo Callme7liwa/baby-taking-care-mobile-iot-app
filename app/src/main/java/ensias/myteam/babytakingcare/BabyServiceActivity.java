@@ -19,7 +19,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import ensias.myteam.babytakingcare.databinding.ActivityBabyServiceBinding;
-import ensias.myteam.babytakingcare.databinding.ActivityTestBinding;
 
 public class BabyServiceActivity extends AppCompatActivity {
 
@@ -33,8 +32,7 @@ public class BabyServiceActivity extends AppCompatActivity {
     //
     private ImageView backBtn ;
     private String babyId ;
-    private Switch temperatures_switch ;
-    private Switch layers_switch ;
+    private Switch temperatures_switch , layers_switch , position_switch , voice_switch , environment_switch ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +65,42 @@ public class BabyServiceActivity extends AppCompatActivity {
             }
         });
 
+        position_switch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if (isChecked) {
+                    reference.child("position").setValue(Boolean.TRUE);
+                } else {
+                    // Switch is off
+                    reference.child("position").setValue(Boolean.FALSE);
+                }
+            }
+        });
+
+        voice_switch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if (isChecked) {
+                    reference.child("voice").setValue(Boolean.TRUE);
+                } else {
+                    // Switch is off
+                    reference.child("voice").setValue(Boolean.FALSE);
+                }
+            }
+        });
+
+        environment_switch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if (isChecked) {
+                    reference.child("environment").setValue(Boolean.TRUE);
+                } else {
+                    // Switch is off
+                    reference.child("environment").setValue(Boolean.FALSE);
+                }
+            }
+        });
+
 
     }
 
@@ -79,6 +113,9 @@ public class BabyServiceActivity extends AppCompatActivity {
         backBtn = binding.backBtn;
         temperatures_switch = binding.mySwitchTemperature ;
         layers_switch = binding.mySwitchLayers ;
+        voice_switch = binding.mySwitchVoice;
+        position_switch = binding.mySwitchPosition;
+        environment_switch = binding.mySwitchEnvironment;
         //
         auth = FirebaseAuth.getInstance() ;
         user = auth.getCurrentUser();
@@ -92,6 +129,9 @@ public class BabyServiceActivity extends AppCompatActivity {
                 // Récupérer la valeur du champ "temperatures"
                 Boolean temperaturesEnabled = dataSnapshot.child("temperatures").getValue(Boolean.class);
                 Boolean layersEnabled = dataSnapshot.child("layers").getValue(Boolean.class);
+                Boolean positionEnabled = dataSnapshot.child("position").getValue(Boolean.class);
+                Boolean voiceEnabled = dataSnapshot.child("voice").getValue(Boolean.class);
+                Boolean environmentEnabled = dataSnapshot.child("environment").getValue(Boolean.class);
                 if (temperaturesEnabled != null && temperaturesEnabled) {
                     temperatures_switch.setChecked(true);
                 } else {
@@ -101,6 +141,25 @@ public class BabyServiceActivity extends AppCompatActivity {
                     layers_switch.setChecked(true);
                 }  else {
                     layers_switch.setChecked(false);
+                }
+                if(positionEnabled != null && positionEnabled)
+                {
+                    position_switch.setChecked(true);
+                }
+                else {
+                    position_switch.setChecked(false);
+                }
+                if(voiceEnabled != null && voiceEnabled)
+                {
+                    voice_switch.setChecked(true);
+                }else {
+                    voice_switch.setChecked(false);
+                }
+                if(environmentEnabled != null && environmentEnabled)
+                {
+                    environment_switch.setChecked(true);
+                } else {
+                    environment_switch.setChecked(false);
                 }
 
             }
