@@ -47,7 +47,7 @@ import java.util.Objects;
 
 import ensias.myteam.babytakingcare.Models.Parent;
 
-public class EditUserActivity extends AppCompatActivity {
+public class  EditUserActivity extends AppCompatActivity {
 
     private TextView changeImage  , badgeLetter_edit;
     private ImageView userBadge , back_btn ;

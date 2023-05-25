@@ -1,6 +1,8 @@
 package ensias.myteam.babytakingcare.Models;
 
 public class Parent {
+    private  String id ;
+    private  String email ;
     private  String firstName ;
     private  String secondName ;
     private  String image ;
@@ -17,6 +19,22 @@ public class Parent {
     public Parent(String firstName, String secondName) {
         this.firstName = firstName;
         this.secondName = secondName;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getFirstName() {

@@ -7,12 +7,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.MutableData;
+import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -36,20 +39,52 @@ public class MessagesActivity extends AppCompatActivity {
 
         messages = new ArrayList<>();
 
+        String conversationId = getIntent().getStringExtra("conversationID");
+        String fullName = getIntent().getStringExtra("fullName");
+        String image = getIntent().getStringExtra("image");
+
+        DatabaseReference unviewed_ref = FirebaseDatabase
+                .getInstance()
+                .getReference("babiesDb")
+                .child("messages")
+                .child(conversationId)
+                .child("unviewed");
+
+        unviewed_ref.runTransaction(new Transaction.Handler() {
+            @NonNull
+            @Override
+            public Transaction.Result doTransaction(@NonNull MutableData mutableData) {
+                Integer currentValue = mutableData.getValue(Integer.class);
+                if (currentValue == null) {
+                    mutableData.setValue(0);
+                } else if(currentValue > 0){
+                    mutableData.setValue(0);
+                }
+                return Transaction.success(mutableData);
+            }
+
+            @Override
+            public void onComplete(@Nullable DatabaseError error, boolean committed, @Nullable DataSnapshot currentData) {
+                if (error != null) {
+                    Log.e("FirebaseTransaction", "Transaction failed: " + error.getMessage());
+                } else {
+                    Log.d("FirebaseTransaction", "Transaction completed successfully.");
+                }
+            }
+        });
+
+
         // Récupération de la référence à la base de données
-        String userId = "7aae99b8-0fb1-465e-9be8-9b0db3acdc6d";
         messagesRef = FirebaseDatabase
                                         .getInstance()
                                         .getReference("babiesDb")
                                         .child("messages")
-                                        .child(userId)
+                                        .child(conversationId)
                                         .child("conversation");
-
-        //initialisation();
 
         mRecyclerView = findViewById(R.id.listMessages_rv);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mAdapter = new MessageAdapter(this, new ArrayList<Message>());
+        mAdapter = new MessageAdapter(this, new ArrayList<Message>() , fullName , image);
         mRecyclerView.setAdapter(mAdapter);
 
         messagesRef.addChildEventListener(new ChildEventListener() {
@@ -80,42 +115,5 @@ public class MessagesActivity extends AppCompatActivity {
                 // Rien à faire ici
             }
         });
-    }
-
-    // Écouteur pour les modifications de la base de données
-       /* messagesRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // Retrieve the messages from the dataSnapshot object
-                for (DataSnapshot messageSnapshot : dataSnapshot.getChildren()) {
-                    Message message = messageSnapshot.getValue(Message.class);
-                    messages.add(message);
-                }
-                showMessages();
-                System.out.println("the size is " + messages.size());
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                // Handle database error
-            }
-        });
-    }*/
-
-    private void initialisation()
-    {
-        // Configuration de la RecyclerView
-        mRecyclerView = findViewById(R.id.listMessages_rv);
-        mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        mLayoutManager.setReverseLayout(true); // inverser l'ordre des éléments
-        mLayoutManager.setStackFromEnd(true); // empiler les nouveaux éléments en bas
-        mRecyclerView.setLayoutManager(mLayoutManager);
-    }
-
-    private void showMessages()
-    {
-        System.out.println("rendered ");
-        mAdapter = new MessageAdapter(MessagesActivity.this , messages);
-        mRecyclerView.setAdapter(mAdapter);
     }
 }

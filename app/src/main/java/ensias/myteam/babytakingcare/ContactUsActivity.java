@@ -1,17 +1,24 @@
 package ensias.myteam.babytakingcare;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.MutableData;
+import com.google.firebase.database.Transaction;
 import com.sdsmdg.tastytoast.TastyToast;
 
 import java.util.UUID;
@@ -51,9 +58,10 @@ public class ContactUsActivity extends AppCompatActivity {
 
                 if(emailValue.equals("") || messageValue.equals(""))
                     TastyToast.makeText(ContactUsActivity.this, "please fill all the inputs" , TastyToast.LENGTH_SHORT, TastyToast.ERROR).show();
-                else
-                    TastyToast.makeText(ContactUsActivity.this, "Your message was submit successfully" , TastyToast.LENGTH_SHORT, TastyToast.SUCCESS).show();
-                saveMessage(emailValue,messageValue);
+                else {
+                    TastyToast.makeText(ContactUsActivity.this, "Your message was submit successfully", TastyToast.LENGTH_SHORT, TastyToast.SUCCESS).show();
+                    saveMessage(emailValue, messageValue);
+                }
                 progressDialog.dismiss();
             }
         });
@@ -61,8 +69,8 @@ public class ContactUsActivity extends AppCompatActivity {
 
     private void saveMessage(String email , String body)
     {
-        //FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        String userId = UUID.randomUUID().toString();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String userId = user.getUid();
         DatabaseReference babiesRef = FirebaseDatabase
                 .getInstance()
                 .getReference("babiesDb")
@@ -70,18 +78,50 @@ public class ContactUsActivity extends AppCompatActivity {
                 .child(userId)
                 .child("conversation")
                 .child(UUID.randomUUID().toString());
+
         DatabaseReference timeStampRef = FirebaseDatabase
                 .getInstance()
                 .getReference("babiesDb")
                 .child("messages")
                 .child(userId)
                 .child("lastMessageTimestamp");
-        String timestamp = String.valueOf(System.currentTimeMillis());
+
+        Long timestamp = Long.valueOf(System.currentTimeMillis());
         Message message = new Message();
         message.setEmail(email);
         message.setBody(body);
         message.setTimestamp(timestamp);
         babiesRef.setValue(message);
         timeStampRef.setValue(timestamp);
+
+        DatabaseReference unviewed_ref = FirebaseDatabase
+                .getInstance()
+                .getReference("babiesDb")
+                .child("messages")
+                .child(userId)
+                .child("unviewed");
+
+        unviewed_ref.runTransaction(new Transaction.Handler() {
+            @NonNull
+            @Override
+            public Transaction.Result doTransaction(@NonNull MutableData mutableData) {
+                Integer currentValue = mutableData.getValue(Integer.class);
+                if (currentValue == null) {
+                    mutableData.setValue(1);
+                } else {
+                    mutableData.setValue(currentValue + 1);
+                }
+                return Transaction.success(mutableData);
+            }
+
+            @Override
+            public void onComplete(@Nullable DatabaseError error, boolean committed, @Nullable DataSnapshot currentData) {
+                    if (error != null) {
+                        Log.e("FirebaseTransaction", "Transaction failed: " + error.getMessage());
+                    } else {
+                        Log.d("FirebaseTransaction", "Transaction completed successfully.");
+                    }
+                }
+        });
     }
 }

@@ -1,11 +1,14 @@
 package ensias.myteam.babytakingcare.Adapters;
 
 import android.content.Context;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -16,12 +19,15 @@ import ensias.myteam.babytakingcare.R;
 
 public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageViewHolder> {
     private ArrayList<Message> mData;
+    private String fullName ;
+    private String image ;
     private Context context ;
 
 
-    public MessageAdapter(Context context , ArrayList<Message> data) {
+    public MessageAdapter(Context context , ArrayList<Message> data , String fullName , String image ) {
         this.context = context ;
-        System.out.println("the size is in adapter => " + data.size());
+        this.fullName = fullName ;
+        this.image = image ;
         mData = data;
     }
 
@@ -35,8 +41,11 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
     @Override
     public void onBindViewHolder(MessageViewHolder holder, int position) {
         Message message = mData.get( position);
-        System.out.println("the message is " + message.getBody());
-        holder.mTextView.setText(message.getBody());
+        holder.messageTextView.setText(message.getBody());
+        holder.timestampTextView.setText(message.getTimestamp().toString());
+        if (image != null && !image.isEmpty()) {
+            holder.imageView.setImageURI(Uri.parse(image));
+        }
     }
 
     @Override
@@ -46,17 +55,18 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
 
     public void addItem(Message message) {
         mData.add(message);
-        System.out.println("the size is avant " + mData.size());
         notifyItemInserted(mData.size() - 1);
-        System.out.println("the size is apres " + mData.size());
     }
 
     public static class MessageViewHolder extends RecyclerView.ViewHolder {
-        public TextView mTextView;
+        public TextView messageTextView , timestampTextView;
+        public ImageView imageView ;
 
         public MessageViewHolder(View itemView) {
             super(itemView);
-            mTextView = itemView.findViewById(R.id.message_content);
+            messageTextView = itemView.findViewById(R.id.message_content);
+            timestampTextView = itemView.findViewById(R.id.message_time_stamp);
+            imageView = itemView.findViewById(R.id.message_image_user);
         }
     }
 }

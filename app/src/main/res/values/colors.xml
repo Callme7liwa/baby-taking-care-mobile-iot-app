@@ -38,6 +38,14 @@
     <color name="green500">#27CCB0</color>
     <color name="green200">#27CC42</color>
     <color name="yellow200">#FFD500</color>
+    <color name="green_dark">#47A992</color>
+    <color name="green_800">#025464</color>
+
+
+    <color name="yellow_light" >#FAF5E4</color>
+    <color name="white_light_services">#F3F3F3</color>
+
+
 
 
 

@@ -54,7 +54,7 @@ public class NotificationService extends Service {
     public void onCreate() {
         super.onCreate();
         initialisation();
-
+        System.out.println("the service of notifications  is running !!");
         handler = new Handler();
         runnable = new Runnable() {
             @Override
@@ -163,8 +163,6 @@ public class NotificationService extends Service {
         notificationRef.setValue(notification);
         //DatabaseReference notificationsRef = this.firebaseDatabase.getReference("babiesDb").child(this.user.getUid()).child("notifications");
         //String notificationId = notificationsRef.push().getKey();
-
-
 
         /*notificationsRef.child(notificationId).setValue(notification)
                 .addOnSuccessListener(aVoid -> {

@@ -34,21 +34,6 @@ public class TestActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        /*Vérifier si les services sont démarrés
-        isTemperatureServiceRunning = isServiceRunning(NotificationService.class);
-        isLayerServiceRunning = isServiceRunning(LayerService.class);*/
-
-        /*Intent temperatureServiceIntent = new Intent(this, NotificationService.class);
-        Intent layerServiceIntent = new Intent(this, LayerService.class);*/
-
-        /*if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            startService(temperatureServiceIntent);
-            startService(layerServiceIntent);
-        } else {
-            startService(temperatureServiceIntent);
-            startService(layerServiceIntent);
-        }*/
-
         binding = ActivityTestBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 

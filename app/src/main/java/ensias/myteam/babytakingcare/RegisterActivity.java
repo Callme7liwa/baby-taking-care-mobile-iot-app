@@ -137,6 +137,7 @@ public class RegisterActivity extends AppCompatActivity {
         Parent parent  = new Parent() ;
         parent.setFirstName(firstNameValue);
         parent.setSecondName(secondNameValue);
+        parent.setEmail(emailValue);
         parent.setCreatedOn(timestamp);
         parent.setUpdatedOn(timestamp);
 

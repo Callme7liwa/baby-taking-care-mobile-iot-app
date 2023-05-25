@@ -4,12 +4,12 @@ public class Message {
 
     private String email ;
     private String body ;
-    private String timestamp ;
+    private Long timestamp ;
 
     public Message() {
     }
 
-    public Message(String email, String body,String timestamp) {
+    public Message(String email, String body,Long timestamp) {
         this.email = email;
         this.body = body;
         this.timestamp = timestamp ;
@@ -31,11 +31,11 @@ public class Message {
         this.body = body;
     }
 
-    public String getTimestamp() {
+    public Long getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(String timestamp) {
+    public void setTimestamp(Long timestamp) {
         this.timestamp = timestamp;
     }
 }

@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
+    android:orientation="vertical"
     tools:context=".AboutServicesActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -41,223 +42,406 @@
             app:layout_constraintTop_toTopOf="@+id/go_back" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <LinearLayout
+    <ScrollView
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_marginTop="60dp"
-        android:padding="20dp"
-        >
+        app:layout_constraintTop_toBottomOf="@id/constraintLayout"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:ignore="MissingConstraints">
+
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="10dp"
             >
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/flash_back_icon"
-                />
-            <TextView
-                android:layout_width="wrap_content"
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="List of our services"
-                android:textColor="@color/black"
-                android:fontFamily="@font/dm_sans_regular"
-                android:textStyle="bold"
-                android:textSize="11dp"
-                android:textAllCaps="true"
-                />
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginLeft="5dp"
-                android:background="#901E1E1E"
-                />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:orientation="horizontal"
-            android:layout_marginTop="10dp"
-            android:padding="10dp"
-            android:background="@drawable/background_custom_blue"
-            >
-
-            <ImageView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:src="@drawable/baby_login"
-                />
-            <LinearLayout style=""
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
-                android:orientation="vertical"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
                 >
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/flash_back_icon"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="List of our services"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/dm_sans_regular"
+                    android:textStyle="bold"
+                    android:textSize="11dp"
+                    android:textAllCaps="true"
+                    />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="5dp"
+                    android:background="#901E1E1E"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+                android:padding="10dp"
+                android:background="@drawable/background_custom_blue"
+                >
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/baby_login"
+                    />
                 <LinearLayout style=""
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:paddingVertical="5dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:orientation="vertical"
                     >
-
-                    <View
-                        android:layout_width="8dp"
-                        android:layout_height="8dp"
-                        android:background="@drawable/circle_red"
-                        />
-
-                    <TextView
-                        android:layout_marginLeft="5dp"
-                        android:layout_width="wrap_content"
+                    <LinearLayout style=""
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Baby Nappy Notifier"
-                        android:textColor="@color/white"
-                        android:fontFamily="@font/dm_sans_regular"
-                        android:textSize="13dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingVertical="5dp"
+                        >
+
+                        <View
+                            android:layout_width="8dp"
+                            android:layout_height="8dp"
+                            android:background="@drawable/circle_red"
+                            />
+
+                        <TextView
+                            android:layout_marginLeft="5dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Baby Nappy Notifier"
+                            android:textColor="@color/white"
+                            android:fontFamily="@font/dm_sans_regular"
+                            android:textSize="13dp"
+                            />
+
+                    </LinearLayout>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="#fff"
+                        android:textSize="8dp"
+                        android:textAllCaps="true"
+                        android:justificationMode="inter_word"
+
+                        android:text="Our baby diaper monitoring service uses advanced technology to monitor your baby's diaper status in real-time. With smart sensors placed in the diaper, our service detects moisture and sends notifications to your mobile phone to inform you when it's time to change your baby's diaper."
                         />
-
                 </LinearLayout>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="#fff"
-                    android:textSize="8dp"
-                    android:textAllCaps="true"
-                    android:justificationMode="inter_word"
 
-                    android:text="Our baby diaper monitoring service uses advanced technology to monitor your baby's diaper status in real-time. With smart sensors placed in the diaper, our service detects moisture and sends notifications to your mobile phone to inform you when it's time to change your baby's diaper."
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+                android:padding="10dp"
+                android:background="@drawable/background_green_800"
+                >
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/icon_voice"
                     />
+                <LinearLayout style=""
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:orientation="vertical"
+                    >
+                    <LinearLayout style=""
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingVertical="5dp"
+                        >
+
+                        <View
+                            android:layout_width="8dp"
+                            android:layout_height="8dp"
+                            android:background="@drawable/circle_red"
+                            />
+
+                        <TextView
+                            android:layout_marginLeft="5dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Baby Cry Mimic"
+                            android:textColor="@color/white"
+                            android:fontFamily="@font/dm_sans_regular"
+                            android:textSize="13dp"
+                            />
+
+                    </LinearLayout>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="#fff"
+                        android:textSize="8dp"
+                        android:textAllCaps="true"
+                        android:justificationMode="inter_word"
+                        android:text="The Baby Cry Simulator is a feature in our app that reproduces realistic baby cries. It helps you become familiar with different types of sounds emitted by a baby, aiding in better understanding their needs and distress signals. It's a convenient tool for parents and caregivers to prepare for responding to their baby's cries."
+
+                        />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+                android:padding="10dp"
+                android:background="@drawable/background_custom_red"
+                >
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/temperature_icon"
+                    />
+                <LinearLayout style=""
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:orientation="vertical"
+                    >
+                    <LinearLayout style=""
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingVertical="5dp"
+                        >
+
+                        <View
+                            android:layout_width="8dp"
+                            android:layout_height="8dp"
+                            android:background="@drawable/circle_green"
+                            />
+
+                        <TextView
+                            android:layout_marginLeft="5dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Baby Temp Track"
+                            android:textColor="@color/white"
+                            android:fontFamily="@font/dm_sans_regular"
+                            android:textSize="13dp"
+                            />
+
+                    </LinearLayout>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="#fff"
+                        android:textSize="8dp"
+                        android:textAllCaps="true"
+                        android:justificationMode="inter_word"
+                        android:text="Our baby temperature monitoring service uses high-precision sensors to measure your baby's temperature in real-time. The data is then transmitted to your mobile phone through a dedicated app, allowing you to easily track changes in your baby's temperature."
+                        />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+                android:padding="10dp"
+                android:background="@drawable/background_custom_green"
+                >
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/cardiaque"
+                    />
+                <LinearLayout style=""
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:orientation="vertical"
+                    >
+                    <LinearLayout style=""
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingVertical="5dp"
+                        >
+
+                        <View
+                            android:layout_width="8dp"
+                            android:layout_height="8dp"
+                            android:background="@drawable/circle_blue"
+                            />
+
+                        <TextView
+                            android:layout_marginLeft="5dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="HeartBeat Monitor"
+                            android:textColor="@color/white"
+                            android:fontFamily="@font/dm_sans_regular"
+                            android:textSize="13dp"
+                            />
+
+                    </LinearLayout>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="#fff"
+                        android:textSize="8dp"
+                        android:textAllCaps="true"
+                        android:justificationMode="inter_word"
+                        android:text="Our baby heart rate monitoring service uses advanced sensors to monitor your baby's heart rate in real time. The data is transmitted to your smartphone through a dedicated app, allowing you to easily track your baby's heart rate and receive alerts if there are any irregularities."
+                        />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+                android:padding="10dp"
+                android:background="@drawable/background_custom_yellow"
+                >
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/icon_envquality"
+                    />
+                <LinearLayout style=""
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:orientation="vertical"
+                    >
+                    <LinearLayout style=""
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingVertical="5dp"
+                        >
+
+                        <View
+                            android:layout_width="8dp"
+                            android:layout_height="8dp"
+                            android:background="@drawable/circle_green"
+                            />
+
+                        <TextView
+                            android:layout_marginLeft="5dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Environmental Quality Measurement"
+                            android:fontFamily="@font/dm_sans_regular"
+                            android:textSize="13dp"
+                            android:textColor="#454545"
+                            />
+
+                    </LinearLayout>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="#454545"
+                        android:textSize="8dp"
+                        android:textAllCaps="true"
+                        android:justificationMode="inter_word"
+                        android:text="Our Air Quality Monitoring Service utilizes advanced sensors for real-time monitoring of air quality parameters. We provide timely data and alerts on pollutants, helping you make informed decisions to improve the air quality and promote a healthier environment."                    />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+                android:padding="10dp"
+                android:background="@drawable/background_custom_greendark"
+                >
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/icon_position"
+                    />
+                <LinearLayout style=""
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:orientation="vertical"
+                    >
+                    <LinearLayout style=""
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingVertical="5dp"
+                        >
+
+                        <View
+                            android:layout_width="8dp"
+                            android:layout_height="8dp"
+                            android:background="@drawable/circle_red"
+                            />
+
+                        <TextView
+                            android:layout_marginLeft="5dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Baby Position Tracker"
+                            android:fontFamily="@font/dm_sans_regular"
+                            android:textSize="13dp"
+                            android:textColor="#fff"
+                            />
+
+                    </LinearLayout>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="#fff"
+                        android:textSize="8dp"
+                        android:textAllCaps="true"
+                        android:justificationMode="inter_word"
+                        android:text="Our app provides a real-time baby position tracking service, allowing parents to monitor their child's sleeping position. With special sensors and a user-friendly interface, you can have peace of mind knowing that your baby is sleeping safely."></TextView>
+                </LinearLayout>
+
             </LinearLayout>
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:orientation="horizontal"
-            android:layout_marginTop="10dp"
-            android:padding="10dp"
-            android:background="@drawable/background_custom_red"
-            >
-
-            <ImageView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:src="@drawable/temperature_icon"
-                />
-            <LinearLayout style=""
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
-                android:orientation="vertical"
-                >
-                <LinearLayout style=""
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:paddingVertical="5dp"
-                    >
-
-                    <View
-                        android:layout_width="8dp"
-                        android:layout_height="8dp"
-                        android:background="@drawable/circle_green"
-                        />
-
-                    <TextView
-                        android:layout_marginLeft="5dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Baby Temp Track"
-                        android:textColor="@color/white"
-                        android:fontFamily="@font/dm_sans_regular"
-                        android:textSize="13dp"
-                        />
-
-                </LinearLayout>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="#fff"
-                    android:textSize="8dp"
-                    android:textAllCaps="true"
-                    android:justificationMode="inter_word"
-                    android:text="Our baby temperature monitoring service uses high-precision sensors to measure your baby's temperature in real-time. The data is then transmitted to your mobile phone through a dedicated app, allowing you to easily track changes in your baby's temperature."
-                    />
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:orientation="horizontal"
-            android:layout_marginTop="10dp"
-            android:padding="10dp"
-            android:background="@drawable/background_custom_green"
-            >
-
-            <ImageView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:src="@drawable/cardiaque"
-                />
-            <LinearLayout style=""
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
-                android:orientation="vertical"
-                >
-                <LinearLayout style=""
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:paddingVertical="5dp"
-                    >
-
-                    <View
-                        android:layout_width="8dp"
-                        android:layout_height="8dp"
-                        android:background="@drawable/circle_blue"
-                        />
-
-                    <TextView
-                        android:layout_marginLeft="5dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="HeartBeat Monitor"
-                        android:textColor="@color/white"
-                        android:fontFamily="@font/dm_sans_regular"
-                        android:textSize="13dp"
-                        />
-
-                </LinearLayout>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="#fff"
-                    android:textSize="8dp"
-                    android:textAllCaps="true"
-                    android:justificationMode="inter_word"
-                    android:text="Our baby heart rate monitoring service uses advanced sensors to monitor your baby's heart rate in real time. The data is transmitted to your smartphone through a dedicated app, allowing you to easily track your baby's heart rate and receive alerts if there are any irregularities."
-                    />
-            </LinearLayout>
-
-        </LinearLayout>
+    </ScrollView>
 
 
-
-
-
-
-    </LinearLayout>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

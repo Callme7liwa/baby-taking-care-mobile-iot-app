@@ -13,48 +13,153 @@
         android:paddingHorizontal="10dp"
         android:paddingVertical="5dp"
         android:orientation="horizontal"
-        android:gravity="center_vertical"
         tools:ignore="MissingConstraints">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/user_image"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            app:cardCornerRadius="20dp"
-            >
-            <ImageView
+        <RelativeLayout
+            android:id="@+id/user_image_container"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/user_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/img_avatar"
-                />
-        </androidx.cardview.widget.CardView>
+                app:cardCornerRadius="30dp">
+
+                <ImageView
+                    android:id="@+id/conversation_parent_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/img_avatar" />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/online_indicator"
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                app:cardCornerRadius="6dp"
+                android:layout_marginEnd="2dp"
+                android:layout_marginRight="2dp"
+                android:layout_marginTop="2dp"
+                android:layout_gravity="right"
+                tools:ignore="NotSibling"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:translationZ="2dp">
+
+                <TextView
+                    android:id="@+id/conversation_number_messages"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/circle_blue"
+                    android:textSize="9dp"
+                    android:text="0"
+                    android:textColor="@color/white"
+                    android:gravity="center"
+                    />
+
+            </androidx.cardview.widget.CardView>
+
+        </RelativeLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:paddingHorizontal="10dp"
             android:orientation="vertical"
             style="">
             <TextView
+                android:id="@+id/conversation_username"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:gravity="bottom"
+                android:layout_weight="1"
                 android:text="Ayoub Seddiki"
+                android:textColor="@color/black"
                 android:fontFamily="@font/dm_sans_regular"
                 android:paddingVertical="2dp"
                 android:textStyle="bold"
+                android:textSize="17dp"
                 />
-            <TextView
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Hi bro you got this"
-                android:fontFamily="@font/dm_sans_regular"
-                android:textSize="11dp"
-                android:paddingVertical="2dp"
-                android:textColor="#AEACAC"
-                android:textStyle="bold"
-                />
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_weight="1"
+                >
+                <TextView
+                    android:id="@+id/conversation_lastMessage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Hi bro you got this"
+                    android:fontFamily="@font/dm_sans_regular"
+                    android:textSize="13dp"
+                    android:paddingVertical="2dp"
+                    android:textColor="#AEACAC"
+                    android:textStyle="bold"
+                    android:layout_marginRight="5dp"
+                    />
+
+                <View
+                    android:layout_width="6dp"
+                    android:layout_height="6dp"
+                    android:background="@drawable/circle_blue"
+                    android:layout_marginRight="5dp"
+                    />
+
+                <TextView
+                    android:id="@+id/conversation_lastMessage_timestamp"
+                    android:gravity="right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1 mars 2057 04:24:34"
+                    android:textColor="@color/black"
+                    android:textSize="13dp"
+                    />
+
+            </LinearLayout>
+
+
+
         </LinearLayout>
 
     </LinearLayout>
+
+    <LinearLayout
+        android:paddingHorizontal="10dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints"
+        android:gravity="center_vertical"
+        app:layout_constraintTop_toBottomOf="@+id/item_conversation_container">
+
+    <View
+        android:layout_width="3dp"
+        android:layout_height="10dp"
+        android:background="@color/blue_app"
+        />
+
+    <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:background="#884C46FE"
+            app:layout_constraintTop_toBottomOf="@+id/item_conversation_container"/>
+
+        <View
+            android:layout_width="3dp"
+            android:layout_height="10dp"
+            android:background="@color/blue_app"
+            />
+    </LinearLayout>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,17 +7,21 @@ public class Baby {
     private String birthday ;
     private String weight ;
     private String temperature ;
+    private String position ;
+    private float environment;
+    private boolean voice ;
     private String created_on, last_updated_on;
 
 
     public Baby() {
     }
 
-    public Baby(String name , String weight , String temperature,String birthday) {
+    public Baby(String name , String weight , String temperature,String birthday , String position ) {
         this.name=name;
         this.weight=weight;
         this.temperature=temperature;
         this.birthday=birthday;
+        this.position = position ;
     }
 
     public String getId() {
@@ -88,4 +92,27 @@ public class Baby {
         this.last_updated_on = last_updated_on ;
     }
 
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
+    }
+
+    public float getEnvironment() {
+        return environment;
+    }
+
+    public void setEnvironment(float environment) {
+        this.environment = environment;
+    }
+
+    public boolean getVoice() {
+        return voice;
+    }
+
+    public void setVoice(boolean voice) {
+        this.voice = voice;
+    }
 }

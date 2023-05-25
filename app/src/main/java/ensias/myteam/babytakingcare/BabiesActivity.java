@@ -41,7 +41,7 @@ public class BabiesActivity extends AppCompatActivity {
     private BabyAdapter contactAdapter;
     private ArrayList<Baby> babies = new ArrayList<>();
     private Baby currentBaby  = new Baby() ;
-    private TextView text_baby_temperature , text_baby_weight , text_baby_name , text_baby_birthday ;
+    private TextView text_baby_temperature , text_baby_environment , text_baby_position , text_baby_voice ,text_baby_weight , text_baby_name , text_baby_birthday ;
     private ImageView go_back ;
     private ProgressDialog progressDialog;
     private ScrollView scrollView;
@@ -68,11 +68,15 @@ public class BabiesActivity extends AppCompatActivity {
         temperatures_baby = findViewById(R.id.temperatures_baby);
         services_baby = findViewById(R.id.services_baby);
         history_baby = findViewById(R.id.histories_baby);
+
         //
         text_baby_name = findViewById(R.id.text_baby_name);
         text_baby_temperature = findViewById(R.id.text_baby_temperature);
         text_baby_weight = findViewById(R.id.text_baby_weight);
         text_baby_birthday = findViewById(R.id.text_baby_birthday);
+        text_baby_environment = findViewById(R.id.text_baby_environment);
+        text_baby_position = findViewById(R.id.text_baby_position);
+        text_baby_voice = findViewById(R.id.text_baby_voice);
         go_back = findViewById(R.id.go_back);
         scrollView = findViewById(R.id.list_info);
         recyclerView = findViewById(R.id.babies_list);
@@ -123,14 +127,14 @@ public class BabiesActivity extends AppCompatActivity {
     private void getBabies()
     {
         progressDialog = new ProgressDialog(this);
-        progressDialog.setTitle("Registration");
-        progressDialog.setMessage("Please wait while u be registered ...");
+        progressDialog.setTitle("getting babies");
+        progressDialog.setMessage("Please wait while data will be extracted from db  ...");
         progressDialog.show();
 
         String userId = user.getUid();
         DatabaseReference babiesRef =
-                                        FirebaseDatabase.getInstance().getReference()
-                                        .child("babiesDb").child(userId).child("babies");
+                                    FirebaseDatabase.getInstance().getReference()
+                                    .child("babiesDb").child(userId).child("babies");
 
         babiesRef.addValueEventListener(new ValueEventListener() {
 
@@ -139,6 +143,13 @@ public class BabiesActivity extends AppCompatActivity {
                 for (DataSnapshot babySnapshot : snapshot.getChildren()) {
                     Baby baby = babySnapshot.getValue(Baby.class);
                     baby.setId(babySnapshot.getKey());
+                    baby.setEnvironment(babySnapshot.child("env_quality").child("value").getValue(Float.class));
+                    baby.setVoice(babySnapshot.child("is_crying").child("value").getValue(Boolean.class));
+                    baby.setPosition(babySnapshot.child("position").getValue(String.class));
+                    System.out.println("the value of  position  env "+babySnapshot.child("position").getValue(String.class));
+
+                    System.out.println("the value of is crying is "+babySnapshot.child("is_crying").child("value").getValue(Boolean.class) );
+                    System.out.println("the value of  position  env "+baby.getPosition());
                     babies.add(baby);
                 }
                 progressDialog.dismiss();
@@ -183,10 +194,35 @@ public class BabiesActivity extends AppCompatActivity {
         this.currentBaby.setBirthday(baby.getBirthday());
         this.currentBaby.setTemperature(baby.getTemperature());
         this.currentBaby.setWeight(baby.getWeight());
+        this.currentBaby.setPosition(baby.getPosition());
+        this.currentBaby.setEnvironment(baby.getEnvironment());
+        this.currentBaby.setVoice(baby.getVoice());
 
         this.text_baby_name.setText(this.currentBaby.getName());
         this.text_baby_temperature.setText(this.currentBaby.getTemperature());
         this.text_baby_weight.setText(this.currentBaby.getWeight());
         this.text_baby_birthday.setText(this.currentBaby.getBirthday());
+
+        float env_value = this.currentBaby.getEnvironment() ;
+        if(env_value > 45 )
+            this.text_baby_environment.setText("not good");
+        else
+            this.text_baby_environment.setText("good");
+
+        switch (this.currentBaby.getPosition())
+        {
+            case "00" : this.text_baby_position.setText("Back");break ;
+            case "01" : this.text_baby_position.setText("Left side");break ;
+            case "10" : this.text_baby_position.setText("Right side");break ;
+            case "11" : this.text_baby_position.setText("Stomach");break ;
+            default : break ;
+        }
+
+        if(this.currentBaby.getVoice())
+            this.text_baby_voice.setText("is crying");
+        else
+            this.text_baby_voice.setText("normal");
+
+
     }
 }

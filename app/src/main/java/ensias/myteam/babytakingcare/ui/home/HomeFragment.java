@@ -19,6 +19,7 @@ import ensias.myteam.babytakingcare.AboutUsActivity;
 import ensias.myteam.babytakingcare.AcceuilActivity;
 import ensias.myteam.babytakingcare.AddBabyActivity;
 import ensias.myteam.babytakingcare.BabiesActivity;
+import ensias.myteam.babytakingcare.ContactUsActivity;
 import ensias.myteam.babytakingcare.EditUserActivity;
 import ensias.myteam.babytakingcare.LoginActivity;
 import ensias.myteam.babytakingcare.TestActivity;
@@ -28,7 +29,7 @@ import ensias.myteam.babytakingcare.databinding.FragmentHomeBinding;
 public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding binding;
-    private LinearLayout list_babies , add_baby , my_info , update_my_info , our_services , aboutUs ;
+    private LinearLayout list_babies , add_baby , my_info , update_my_info , our_services , aboutUs , contactUs ;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -44,6 +45,7 @@ public class HomeFragment extends Fragment {
         update_my_info = binding.updateMyInformations;
         our_services =  binding.ourServices ;
         aboutUs = binding.aboutUs ;
+        contactUs = binding.contactUs;
 
         list_babies.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,6 +91,14 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity() , AboutUsActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        contactUs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), ContactUsActivity.class);
                 startActivity(intent);
             }
         });
