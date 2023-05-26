@@ -94,9 +94,7 @@ public class DiaperService extends Service {
                                     intent.putExtra("date", getCurrentDate() + " at " + getCurrentTime());
                                     startActivity(intent);
                                     // Formater l'heure au format "HH:mm"
-                                    LocalTime currentTime = LocalTime.now();
-                                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
-                                    String formattedTime = currentTime.format(formatter);
+                                    String currentTime = getCurrentTime();
                                     if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
                                     {
                                         NotificationChannel channel = new NotificationChannel("myCh" , "My Channel", NotificationManager.IMPORTANCE_DEFAULT);
@@ -106,7 +104,7 @@ public class DiaperService extends Service {
                                     NotificationCompat.Builder builder = new NotificationCompat.Builder(DiaperService.this, "myCh")
                                             .setSmallIcon(R.drawable.layer_baby)
                                             .setContentTitle(" Diaper Alert  ")
-                                            .setContentText("  You have to change the diaper now  , for " +  babyName + " at " + formattedTime)
+                                            .setContentText("  You have to change the diaper now  , for " +  babyName + " at " + currentTime)
                                             .setPriority(NotificationCompat.PRIORITY_HIGH)
                                             .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
 
@@ -114,7 +112,7 @@ public class DiaperService extends Service {
                                     notificationManagerCompat = NotificationManagerCompat.from(DiaperService.this);
                                     notificationManagerCompat.notify(notificationId++,notification);
 
-                                    saveNotification(babyName);
+                                    saveNotification(babyName,currentTime);
                                 }
                             }
                         }
@@ -132,13 +130,14 @@ public class DiaperService extends Service {
         };
     }
 
-    private  void saveNotification(String babyName)
+    private  void saveNotification(String babyName , String time )
     {
         String notificationId = UUID.randomUUID().toString();
         DatabaseReference notificationRef = FirebaseDatabase.getInstance().getReference("babiesDb").child(this.user.getUid()).child("notifications").child("diapers").child(notificationId);
         ensias.myteam.babytakingcare.Models.Notification notification = new ensias.myteam.babytakingcare.Models.Notification ();
         notification.setDate(getCurrentDate());
-        notification.setDescription(babyName);
+        notification.setDescription(babyName + " changed the layer at " + time);
+        notification.setTime(time);
         notificationRef.setValue(notification);
     }
 
@@ -155,8 +154,6 @@ public class DiaperService extends Service {
         String currentTimeValue = currentTime.format(formatter);
         return currentTimeValue;
     }
-
-
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {

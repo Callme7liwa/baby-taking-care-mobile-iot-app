@@ -4,6 +4,7 @@ public class Notification {
 
     private String id ;
     private String date ;
+    private String time ;
     private String description ;
 
 
@@ -38,5 +39,13 @@ public class Notification {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 }

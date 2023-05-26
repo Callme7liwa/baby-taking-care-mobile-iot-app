@@ -80,10 +80,8 @@ public class TestActivity extends AppCompatActivity {
     private void checkAndStartServices() {
         // Vérifier si les services sont actuellement en cours d'exécution
         boolean isRootService = isServiceRunning(RootService.class);
-
         // Si un ou les deux services ne sont pas en cours d'exécution, les démarrer
         if (!isRootService) {
-            System.out.println("the system is not running");
             Intent rootServiceIntent = new Intent(this, RootService.class);
             startService(rootServiceIntent);
         }
