@@ -23,8 +23,8 @@ public class RootService extends Service {
         notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         Intent notificationService = new Intent(this, NotificationService.class);
         startService(notificationService);
-        Intent layersService = new Intent(this, LayerService.class);
-        startService(layersService);
+        Intent diapersService = new Intent(this, DiaperService.class);
+        startService(diapersService);
         Intent voiceService = new Intent(this, VoiceService.class);
         startService(voiceService);
         Intent environmentService= new Intent(this, EnvironmentService.class);

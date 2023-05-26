@@ -21,9 +21,13 @@
         android:theme="@style/AppTheme"
         tools:targetApi="31">
         <service
-            android:name=".services.EnvironmentService"
+            android:name=".services.DiaperService"
             android:enabled="true"
             android:exported="true"></service>
+        <service
+            android:name=".services.EnvironmentService"
+            android:enabled="true"
+            android:exported="true" />
         <service
             android:name=".services.VoiceService"
             android:enabled="true"

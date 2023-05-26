@@ -1,30 +1,23 @@
 package ensias.myteam.babytakingcare;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import android.app.Notification;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.google.android.material.tabs.TabLayout;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
 import ensias.myteam.babytakingcare.Adapters.BVAdapter;
-import ensias.myteam.babytakingcare.fragments.MenuFragment;
+import ensias.myteam.babytakingcare.fragments.DiapersNotificationFragment;
 import ensias.myteam.babytakingcare.fragments.NotificationFragment;
 
 public class HistoryActivity extends AppCompatActivity {
@@ -32,15 +25,14 @@ public class HistoryActivity extends AppCompatActivity {
     TabLayout tabLayout;
     ViewPager viewPager;
 
+    private ImageView back_btn;
+
     public static final String NOTIFICATION_CHANNEL_ID = "myapp.notification.channel";
 
-    FirebaseDatabase firebaseDatabase;
-    DatabaseReference databaseReference;
-    NotificationManagerCompat notificationManagerCompat ;
-    Notification notification ;
 
 
-    List<String> titles = List.of("Chi haja" , "Notifications");
+
+    List<String> titles = List.of("Diapers" , "Temperatures");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,11 +45,12 @@ public class HistoryActivity extends AppCompatActivity {
     {
         tabLayout = findViewById(R.id.tabLayout);
         viewPager = findViewById(R.id.viewPager);
+        back_btn = findViewById(R.id.back_btn);
 
         BVAdapter bvAdapter = new BVAdapter(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
 
-        bvAdapter.addFragment(new MenuFragment() , "MENU");
-        bvAdapter.addFragment(new NotificationFragment() , "NOTIFICATIONS");
+        bvAdapter.addFragment(new DiapersNotificationFragment() , "Diapers Notification");
+        bvAdapter.addFragment(new NotificationFragment() , "Temperatures Notification ");
 
         viewPager.setAdapter(bvAdapter);
         tabLayout.setupWithViewPager(viewPager);
@@ -97,6 +90,13 @@ public class HistoryActivity extends AppCompatActivity {
             @Override
             public void onPageScrollStateChanged(int state) {
 
+            }
+        });
+
+        back_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
             }
         });
     }

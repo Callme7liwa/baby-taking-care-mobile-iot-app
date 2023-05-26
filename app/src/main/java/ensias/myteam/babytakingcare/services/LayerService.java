@@ -89,7 +89,7 @@ public class LayerService extends Service {
                                     }
                                     NotificationCompat.Builder builder = new NotificationCompat.Builder(LayerService.this, "channelLayers")
                                             .setSmallIcon(R.drawable.layer_baby)
-                                            .setContentTitle("Layer Alert ")
+                                            .setContentTitle("Layer Alert")
                                             .setContentText("the layer of "+babyName+" must be changed now !")
                                             .setPriority(NotificationCompat.PRIORITY_HIGH)
                                             .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));

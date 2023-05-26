@@ -161,18 +161,6 @@ public class NotificationService extends Service {
         String currentDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
         ensias.myteam.babytakingcare.Models.Notification notification = new ensias.myteam.babytakingcare.Models.Notification (notificationId+"11", currentDate, "mehdi suffered a temperature of "+temperature);
         notificationRef.setValue(notification);
-        //DatabaseReference notificationsRef = this.firebaseDatabase.getReference("babiesDb").child(this.user.getUid()).child("notifications");
-        //String notificationId = notificationsRef.push().getKey();
-
-        /*notificationsRef.child(notificationId).setValue(notification)
-                .addOnSuccessListener(aVoid -> {
-                    System.out.println("the notification has been added successfuly");
-                })
-                .addOnFailureListener(e -> {
-                    // Error occurred while adding notification
-                    System.out.println("error occured while adding a new notification ");
-
-                });*/
     }
 
     @Override

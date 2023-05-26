@@ -2,13 +2,16 @@ package ensias.myteam.babytakingcare.Adapters;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -22,10 +25,12 @@ public class NotificationsListAdapter extends RecyclerView.Adapter<Notifications
 
     private Context context;
     private List<Notification> notificationsList;
+    private String notificationType;
 
-    public NotificationsListAdapter(Context context, List<Notification> notificationsList) {
+    public NotificationsListAdapter(Context context, List<Notification> notificationsList,String notificationType) {
         this.context = context;
         this.notificationsList = notificationsList;
+        this.notificationType = notificationType;
     }
 
     @NonNull
@@ -39,15 +44,20 @@ public class NotificationsListAdapter extends RecyclerView.Adapter<Notifications
     public void onBindViewHolder(@NonNull NotificationViewHolder holder, int position) {
         if (notificationsList != null && position < notificationsList.size()) {
             Notification notification = notificationsList.get(position);
-            String id = notification.getId();
             String description = notification.getDescription();
             String date = notification.getDate();
-
-            Random rnd = new Random();
-            int color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
-
             holder.date.setText(date);
             holder.description.setText(description);
+            if(notificationType.equals("temperatures")) {
+                holder.title_notification.setText("Temperature Notification");
+                Drawable drawable = ContextCompat.getDrawable(context, R.drawable.temperature_icon);
+                holder.icon.setImageDrawable(drawable);
+            }
+            else {
+                holder.title_notification.setText("Diaper Notification");
+                Drawable drawable = ContextCompat.getDrawable(context, R.drawable.layer_baby);
+                holder.icon.setImageDrawable(drawable);
+            }
         }
     }
 
@@ -63,12 +73,16 @@ public class NotificationsListAdapter extends RecyclerView.Adapter<Notifications
 
     class NotificationViewHolder extends RecyclerView.ViewHolder {
 
-        TextView date, description;
+        TextView date, description , title_notification;
+        ImageView icon ;
+
 
         public NotificationViewHolder(@Nullable View itemView) {
             super(itemView);
             date = itemView.findViewById(R.id.notificationDate);
             description = itemView.findViewById(R.id.notificationDescription);
+            title_notification = itemView.findViewById(R.id.notification_title);
+            icon = itemView.findViewById(R.id.notification_icon);
         }
     }
 }

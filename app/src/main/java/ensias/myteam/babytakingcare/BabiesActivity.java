@@ -4,19 +4,14 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.telephony.PhoneNumberUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -26,14 +21,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.sdsmdg.tastytoast.TastyToast;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import ensias.myteam.babytakingcare.Adapters.BabyAdapter;
 import ensias.myteam.babytakingcare.Listener.ClickListener;
 import ensias.myteam.babytakingcare.Models.Baby;
-import ensias.myteam.babytakingcare.Models.Parent;
 
 public class BabiesActivity extends AppCompatActivity {
 
@@ -98,7 +92,6 @@ public class BabiesActivity extends AppCompatActivity {
                 Intent intent = new Intent(BabiesActivity.this, ChartsActivity.class);
                 intent.putExtra("babyId", currentBaby.getId().toString());
                 startActivity(intent);
-                finish();
             }
         });
        //
@@ -108,7 +101,6 @@ public class BabiesActivity extends AppCompatActivity {
                 Intent intent = new Intent(BabiesActivity.this, BabyServiceActivity.class);
                 intent.putExtra("babyId", currentBaby.getId().toString());
                 startActivity(intent);
-                finish();
             }
         });
        //
@@ -118,7 +110,6 @@ public class BabiesActivity extends AppCompatActivity {
                 Intent intent = new Intent(BabiesActivity.this, HistoryActivity.class);
                 intent.putExtra("babyId", currentBaby.getId().toString());
                 startActivity(intent);
-                finish();
             }
         });
         //
@@ -132,24 +123,20 @@ public class BabiesActivity extends AppCompatActivity {
         progressDialog.show();
 
         String userId = user.getUid();
-        DatabaseReference babiesRef =
-                                    FirebaseDatabase.getInstance().getReference()
-                                    .child("babiesDb").child(userId).child("babies");
+        DatabaseReference babiesRef =  FirebaseDatabase.getInstance().getReference()
+                                       .child("babiesDb").child(userId).child("babies");
 
         babiesRef.addValueEventListener(new ValueEventListener() {
 
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                babies.clear();
                 for (DataSnapshot babySnapshot : snapshot.getChildren()) {
                     Baby baby = babySnapshot.getValue(Baby.class);
                     baby.setId(babySnapshot.getKey());
                     baby.setEnvironment(babySnapshot.child("env_quality").child("value").getValue(Float.class));
                     baby.setVoice(babySnapshot.child("is_crying").child("value").getValue(Boolean.class));
                     baby.setPosition(babySnapshot.child("position").getValue(String.class));
-                    System.out.println("the value of  position  env "+babySnapshot.child("position").getValue(String.class));
-
-                    System.out.println("the value of is crying is "+babySnapshot.child("is_crying").child("value").getValue(Boolean.class) );
-                    System.out.println("the value of  position  env "+baby.getPosition());
                     babies.add(baby);
                 }
                 progressDialog.dismiss();
@@ -191,7 +178,9 @@ public class BabiesActivity extends AppCompatActivity {
     {
         this.currentBaby.setId(baby.getId());
         this.currentBaby.setName(baby.getName());
-        this.currentBaby.setBirthday(baby.getBirthday());
+
+        this.currentBaby.setBirthday(getBirthdayBaby(baby.getBirthday()));
+
         this.currentBaby.setTemperature(baby.getTemperature());
         this.currentBaby.setWeight(baby.getWeight());
         this.currentBaby.setPosition(baby.getPosition());
@@ -222,7 +211,18 @@ public class BabiesActivity extends AppCompatActivity {
             this.text_baby_voice.setText("is crying");
         else
             this.text_baby_voice.setText("normal");
+    }
 
-
+    private String getBirthdayBaby(String birthday)
+    {
+        if(birthday != null && !birthday.equals("")) {
+            long timestamp = Long.parseLong(birthday);  // Example timestamp in seconds
+            long milliseconds = timestamp * 1000;
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+            Date date = new Date(milliseconds);
+            String formattedDate = sdf.format(date);
+            return formattedDate;
+        }
+        return "";
     }
 }

@@ -6,6 +6,7 @@ public class Notification {
     private String date ;
     private String description ;
 
+
     public Notification() {
     }
 
